@@ -5,6 +5,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import org.telegram.messenger.AndroidUtilities;
+import org.telegram.messenger.ApplicationLoader;
 import org.telegram.messenger.FileLog;
 import org.telegram.messenger.NotificationCenter;
 import org.telegram.messenger.SharedConfig;
@@ -41,6 +42,14 @@ public class PushHelper {
     }
 
     private static void checkAppUpdate() {
+        if (ApplicationLoader.applicationLoaderInstance.isCustomUpdate()) {
+            ApplicationLoader.applicationLoaderInstance.checkUpdate(true, () -> AndroidUtilities.runOnUIThread(() -> {
+                SharedConfig.lastUpdateCheckTime = System.currentTimeMillis();
+                SharedConfig.saveConfig();
+                NotificationCenter.getGlobalInstance().postNotificationName(NotificationCenter.appUpdateAvailable);
+            }));
+            return;
+        }
         UpdateHelper.getInstance().checkNewVersionAvailable((res, error) -> {
             SharedConfig.lastUpdateCheckTime = System.currentTimeMillis();
             SharedConfig.saveConfig();

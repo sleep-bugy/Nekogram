@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.view.ViewGroup;
 
+import java.io.File;
+
 import org.telegram.messenger.regular.BuildConfig;
 import org.telegram.tgnet.TLRPC;
 import org.telegram.ui.Components.UpdateAppAlertDialog;
@@ -11,6 +13,7 @@ import org.telegram.ui.Components.UpdateLayout;
 import org.telegram.ui.IUpdateLayout;
 
 import tw.nekomimi.nekogram.Extra;
+import tw.nekomimi.nekogram.helpers.RepoUpdateHelper;
 
 public class ApplicationLoaderImpl extends ApplicationLoader {
     @Override
@@ -31,6 +34,56 @@ public class ApplicationLoaderImpl extends ApplicationLoader {
             FileLog.e(e);
         }
         return true;
+    }
+
+    @Override
+    public boolean showCustomUpdateAppPopup(Context context, BetaUpdate update, int account) {
+        return RepoUpdateHelper.getInstance().showUpdatePopup(context, update, account);
+    }
+
+    @Override
+    public boolean isCustomUpdate() {
+        return RepoUpdateHelper.getInstance().isEnabled();
+    }
+
+    @Override
+    public void downloadUpdate() {
+        RepoUpdateHelper.getInstance().downloadUpdate();
+    }
+
+    @Override
+    public void cancelDownloadingUpdate() {
+        RepoUpdateHelper.getInstance().cancelDownloadingUpdate();
+    }
+
+    @Override
+    public boolean isDownloadingUpdate() {
+        return RepoUpdateHelper.getInstance().isDownloadingUpdate();
+    }
+
+    @Override
+    public float getDownloadingUpdateProgress() {
+        return RepoUpdateHelper.getInstance().getDownloadingUpdateProgress();
+    }
+
+    @Override
+    public void checkUpdate(boolean force, Runnable whenDone) {
+        RepoUpdateHelper.getInstance().checkUpdate(force, whenDone);
+    }
+
+    @Override
+    public BetaUpdate getUpdate() {
+        return RepoUpdateHelper.getInstance().getUpdate();
+    }
+
+    @Override
+    public String getUpdateCheckError() {
+        return RepoUpdateHelper.getInstance().getLastError();
+    }
+
+    @Override
+    public File getDownloadedUpdateFile() {
+        return RepoUpdateHelper.getInstance().getDownloadedUpdateFile();
     }
 
     @Override

@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -24,6 +25,8 @@ import androidx.core.graphics.ColorUtils;
 import androidx.core.widget.NestedScrollView;
 
 import org.telegram.messenger.AndroidUtilities;
+import org.telegram.messenger.ApplicationLoader;
+import org.telegram.messenger.BetaUpdate;
 import org.telegram.messenger.DocumentObject;
 import org.telegram.messenger.FileLoader;
 import org.telegram.messenger.ImageLocation;
@@ -265,7 +268,16 @@ public class UpdateAppAlertDialog extends BottomSheet {
         messageTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
         messageTextView.setMovementMethod(new AndroidUtilities.LinkMovementMethodMy());
         messageTextView.setLinkTextColor(Theme.getColor(Theme.key_dialogTextLink));
-        messageTextView.setText(LocaleController.formatString(R.string.AppUpdateVersionAndSize, appUpdate.version, update.document instanceof TLRPC.TL_document ? AndroidUtilities.formatFileSize(appUpdate.document.size) : "Play Store"));
+        BetaUpdate customUpdate = ApplicationLoader.applicationLoaderInstance.isCustomUpdate() ? ApplicationLoader.applicationLoaderInstance.getUpdate() : null;
+        String sizeLabel;
+        if (update.document instanceof TLRPC.TL_document) {
+            sizeLabel = AndroidUtilities.formatFileSize(appUpdate.document.size);
+        } else if (customUpdate != null && customUpdate.size != null && customUpdate.size > 0) {
+            sizeLabel = AndroidUtilities.formatFileSize(customUpdate.size);
+        } else {
+            sizeLabel = "APK";
+        }
+        messageTextView.setText(LocaleController.formatString(R.string.AppUpdateVersionAndSize, appUpdate.version, sizeLabel));
         messageTextView.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.TOP);
         linearLayout.addView(messageTextView, LayoutHelper.createLinear(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.TOP | Gravity.CENTER_HORIZONTAL, 23, 0, 23, 5));
 
@@ -293,9 +305,17 @@ public class UpdateAppAlertDialog extends BottomSheet {
         container.addView(shadow, frameLayoutParams);
 
         ButtonWithCounterView doneButton = new ButtonWithCounterView(context, null).setRound();
-        doneButton.setText(LocaleController.formatString(R.string.AppUpdateDownloadNow), false);
+        boolean customUpdateReady = customUpdate != null && ApplicationLoader.applicationLoaderInstance.getDownloadedUpdateFile() != null;
+        doneButton.setText(LocaleController.getString(customUpdateReady ? R.string.Open : R.string.AppUpdateDownloadNow), false);
         doneButton.setOnClickListener(v -> {
-            if (update.document instanceof TLRPC.TL_document) {
+            if (ApplicationLoader.applicationLoaderInstance.isCustomUpdate() && customUpdate != null && TextUtils.equals(customUpdate.version, appUpdate.version)) {
+                var downloadedApk = ApplicationLoader.applicationLoaderInstance.getDownloadedUpdateFile();
+                if (downloadedApk != null && downloadedApk.exists() && context instanceof Activity activity) {
+                    ApkInstaller.installUpdate(activity, downloadedApk);
+                } else {
+                    ApplicationLoader.applicationLoaderInstance.downloadUpdate();
+                }
+            } else if (update.document instanceof TLRPC.TL_document) {
                 FileLoader.getInstance(accountNum).loadFile(appUpdate.document, "update", FileLoader.PRIORITY_NORMAL, 1);
             } else {
                 Browser.openUrl(context, appUpdate.url);

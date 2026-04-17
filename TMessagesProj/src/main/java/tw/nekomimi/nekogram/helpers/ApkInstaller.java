@@ -95,16 +95,12 @@ public final class ApkInstaller {
         }
     }
 
-    public static void installUpdate(Activity context, TLRPC.Document document) {
-        if (context == null || document == null) {
+    public static void installUpdate(Activity context, File apk) {
+        if (context == null || apk == null || !apk.exists()) {
             return;
         }
         if (hasBrokenPackageInstaller(context)) {
-            AndroidUtilities.openForView(document, false, context);
-            return;
-        }
-        var apk = FileLoader.getInstance(UserConfig.selectedAccount).getPathToAttach(document, true);
-        if (apk == null) {
+            AndroidUtilities.openForView(apk, apk.getName(), "application/vnd.android.package-archive", context, null, false);
             return;
         }
         if (dialog != null && dialog.isShowing()) {
@@ -156,6 +152,14 @@ public final class ApkInstaller {
                 context.startActivity(intent);
             }
         });
+    }
+
+    public static void installUpdate(Activity context, TLRPC.Document document) {
+        if (context == null || document == null) {
+            return;
+        }
+        var apk = FileLoader.getInstance(UserConfig.selectedAccount).getPathToAttach(document, true);
+        installUpdate(context, apk);
     }
 
     private static Boolean hasBrokenPackageInstaller = null;

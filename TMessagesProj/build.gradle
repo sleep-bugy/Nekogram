@@ -111,6 +111,7 @@ android {
             buildConfigField("String","SENTRY_DSN", "\"${localProperties.get("sentryDsn")}\"")
             buildConfigField("long","HELPER_BOT_ID", "${localProperties.get("helperBotId")}")
             buildConfigField("String","HELPER_BOT_USERNAME", "\"${localProperties.get("helperBotUsername")}\"")
+            buildConfigField("String", "CUSTOM_UPDATE_MANIFEST_URL", "\"${localProperties.getProperty("updateManifestUrl", "https://raw.githubusercontent.com/sleep-bugy/Nekogram/main/update.json")}\"")
         }
 
         release {
@@ -126,6 +127,7 @@ android {
             buildConfigField("String","SENTRY_DSN", "\"${localProperties.get("sentryDsn")}\"")
             buildConfigField("long","HELPER_BOT_ID", "${localProperties.get("helperBotId")}")
             buildConfigField("String","HELPER_BOT_USERNAME", "\"${localProperties.get("helperBotUsername")}\"")
+            buildConfigField("String", "CUSTOM_UPDATE_MANIFEST_URL", "\"${localProperties.getProperty("updateManifestUrl", "https://raw.githubusercontent.com/sleep-bugy/Nekogram/main/update.json")}\"")
         }
     }
     namespace 'org.telegram.messenger'

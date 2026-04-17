@@ -5898,12 +5898,17 @@ public class LaunchActivity extends BasePermissionsActivity implements INavigati
             firstAppUpdateCheck = false;
             ApplicationLoader.applicationLoaderInstance.checkUpdate(force, () -> {
                 final BetaUpdate pendingUpdate = ApplicationLoader.applicationLoaderInstance.getUpdate();
+                final String updateError = ApplicationLoader.applicationLoaderInstance.getUpdateCheckError();
                 if (progress != null) {
                     progress.end();
                     if (pendingUpdate == null) {
                         BaseFragment fragment = getLastFragment();
                         if (fragment != null) {
-                            BulletinFactory.of(fragment).createSimpleBulletin(R.raw.chats_infotip, LocaleController.getString(R.string.YourVersionIsLatest)).show();
+                            if (updateError == null) {
+                                BulletinFactory.of(fragment).createSimpleBulletin(R.raw.chats_infotip, LocaleController.getString(R.string.YourVersionIsLatest)).show();
+                            } else {
+                                AlertsCreator.createSimpleAlert(this, LocaleController.getString(R.string.ErrorOccurred) + "\n" + updateError).show();
+                            }
                         }
                     }
                 }

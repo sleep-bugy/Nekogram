@@ -715,6 +715,9 @@ public class ApplicationLoader extends Application {
     public BetaUpdate getUpdate() {
         return null;
     }
+    public String getUpdateCheckError() {
+        return null;
+    }
     public File getDownloadedUpdateFile() {
         return null;
     }
