@@ -60,10 +60,14 @@ public class ConfigHelper extends BaseRemoteHelper {
     private static List<News> getNews() {
         Config config = getInstance().getConfig();
         if (config == null || config.news == null) {
-            return Collections.emptyList();
+            List<News> defaultNews = Extra.getDefaultNews();
+            return defaultNews != null ? defaultNews : Collections.emptyList();
         }
         ArrayList<News> newsItems = new ArrayList<>();
         config.news.forEach(news -> {
+            if (news == null) {
+                return;
+            }
             if (news.mcc != null && news.mcc != NekoConfig.userMcc) {
                 return;
             }
@@ -87,7 +91,7 @@ public class ConfigHelper extends BaseRemoteHelper {
     public static List<News> getNewsForProxy() {
         return getNews()
                 .stream()
-                .filter(news -> news.type == TYPE_PROXY)
+                .filter(news -> news.type != null && news.type == TYPE_PROXY)
                 .filter(news -> news.id == null || !preferences.getBoolean("news_dismissed_" + news.id, false))
                 .toList();
     }
@@ -95,7 +99,7 @@ public class ConfigHelper extends BaseRemoteHelper {
     public static List<News> getNewsForSettings() {
         return getNews()
                 .stream()
-                .filter(news -> news.type == TYPE_NEWS || news.type == TYPE_PROXY)
+                .filter(news -> news.type != null && (news.type == TYPE_NEWS || news.type == TYPE_PROXY))
                 .filter(news -> news.id == null || !preferences.getBoolean("news_dismissed_" + news.id, false))
                 .toList();
     }
@@ -103,7 +107,7 @@ public class ConfigHelper extends BaseRemoteHelper {
     public static TLRPC.TL_pendingSuggestion getNewsSuggestion() {
         return getNews()
                 .stream()
-                .filter(news -> news.type == TYPE_SUGGESTION)
+                .filter(news -> news.type != null && news.type == TYPE_SUGGESTION)
                 .filter(news -> news.id == null || !preferences.getBoolean("news_dismissed_" + news.id, false))
                 .findAny()
                 .map(news -> {
