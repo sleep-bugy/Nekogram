@@ -41,6 +41,8 @@ import org.telegram.ui.ActionBar.Theme;
 import org.telegram.ui.Components.spoilers.SpoilersTextView;
 import org.telegram.ui.Stories.recorder.ButtonWithCounterView;
 
+import tw.nekomimi.nekogram.helpers.ApkInstaller;
+
 public class UpdateAppAlertDialog extends BottomSheet {
 
     private TLRPC.TL_help_appUpdate appUpdate;

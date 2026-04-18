@@ -323,12 +323,14 @@ public final class RepoUpdateHelper {
                 }
             }
         }
+        final boolean downloadSuccess = success;
+        final String downloadFailure = failure;
         AndroidUtilities.runOnUIThread(() -> {
             NotificationCenter.getGlobalInstance().postNotificationName(NotificationCenter.appUpdateAvailable);
-            if (success) {
+            if (downloadSuccess) {
                 showDownloadReady();
-            } else if (failure != null) {
-                showDownloadFailure(failure);
+            } else if (downloadFailure != null) {
+                showDownloadFailure(downloadFailure);
             }
         });
     }
