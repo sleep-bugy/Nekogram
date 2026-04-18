@@ -1,10 +1,10 @@
 {
-  "version": "12.6.4",
-  "version_code": 6666,
-  "url": "",
-  "file_name": "",
-  "size": 0,
-  "sha256": "",
+  "version": "12.6.5",
+  "version_code": 6667,
+  "url": "https://github.com/sleep-bugy/Nekogram/releases/download/v12.6.5/Nekogram-12.6.5-6667-arm64-v8a.apk",
+  "file_name": "Nekogram-12.6.5-6667-arm64-v8a.apk",
+  "size": 65947930,
+  "sha256": "7c924d68d62fe6d962be1ef27450de1f3055c083a442728f01bca52308901594",
   "can_not_skip": false,
-  "changelog": "Update this file on each release to publish a new APK."
+  "changelog": "Changelog:\n- [AI Editor](https://telegram.org/blog/ai-editor-mighty-polls-and-more)\n- Upstream to 12.6.4\n- Fix ItemOptions Backgroud blur position\n- Add Icon to Login Menu\n- Use Original Translate Code When Provider is Telegram\n- Add OTA Update by Project Sleep\n- Fix Notification For Some Device cant Show\n- Sleep timer for audio player\n- Sort folders by unread\n- Fade filtered messages (transparent message filters)\n- Add comma after mention\n- Disable unarchive swipe\n- Hide side share button\n- Hide photo counter"
 }
