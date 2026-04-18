@@ -1,41 +1,48 @@
 package tw.nekomimi.nekogram;
 
-import org.lsposed.lsparanoid.Obfuscate;
 import org.telegram.messenger.BuildConfig;
 
+import java.util.List;
+
 import tw.nekomimi.nekogram.helpers.UserHelper;
+import tw.nekomimi.nekogram.helpers.remote.ConfigHelper;
 
-@Obfuscate
 public class Extra {
+    // https://core.telegram.org/api/obtaining_api_id
+    public static final int APP_ID = hide;
+    public static final String APP_HASH = "hide";
 
-    public static int APP_ID = BuildConfig.API_ID;
-    public static String APP_HASH = BuildConfig.API_HASH;
-    public static String TWPIC_BOT_USERNAME = BuildConfig.TWPIC_BOT_USERNAME;
-    public static String SENTRY_DSN = BuildConfig.SENTRY_DSN;
+    public static final String PLAYSTORE_APP_URL = "";
 
-    public static boolean FORCE_ANALYTICS = "play".equals(BuildConfig.BUILD_TYPE);
+    public static String WS_USER_AGENT = "";
+    public static String WS_CONN_HASH = "";
+    public static String WS_DEFAULT_DOMAIN = "";
 
-    private static final UserHelper.BotInfo HELPER_BOT = new UserHelper.BotInfo() {
-        @Override
-        public long getId() {
-            return BuildConfig.HELPER_BOT_ID;
-        }
+    public static String TWPIC_BOT_USERNAME = null;
 
-        @Override
-        public String getUsername() {
-            return BuildConfig.HELPER_BOT_USERNAME;
-        }
-    };
+    public static boolean FORCE_ANALYTICS = false;
 
-    public static UserHelper.BotInfo getHelperBot() {
-        return HELPER_BOT;
-    }
+    public static String TLV_URL = "";
+
+    public static String SENTRY_DSN = "hide";
 
     public static boolean isDirectApp() {
         return "release".equals(BuildConfig.BUILD_TYPE) || "debug".equals(BuildConfig.BUILD_TYPE);
     }
 
+    public static List<ConfigHelper.News> getDefaultNews() {
+        return null;
+    }
+
+    public static UserHelper.BotInfo getHelperBot() {
+        return null;
+    }
+
+    public static UserHelper.UserInfoBot getUserInfoBot(boolean fallback) {
+        return null;
+    }
+
     public static boolean isTrustedBot(long id) {
-        return id == BuildConfig.HELPER_BOT_ID;
+        return false;
     }
 }
