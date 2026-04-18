@@ -122,6 +122,8 @@ import org.telegram.ui.LaunchActivity;
 import org.telegram.ui.Stories.recorder.ButtonWithCounterView;
 import org.telegram.ui.Stories.recorder.SelectAudioAlert;
 
+import tw.nekomimi.nekogram.helpers.SleepTimerHelper;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -146,6 +148,7 @@ public class AudioPlayerAlert extends BottomSheet implements NotificationCenter.
     private FrameLayout playerLayout;
     private ButtonWithCounterView saveToProfileButton;
     private ButtonWithCounterView unsaveFromProfileButton;
+    private ButtonWithCounterView sleepTimerButton;
     private ItemTouchHelper itemTouchHelper;
     private CoverContainer coverContainer;
     private ClippingTextViewSwitcher titleTextView;
@@ -1283,7 +1286,7 @@ public class AudioPlayerAlert extends BottomSheet implements NotificationCenter.
                 .createSimpleBulletin(R.raw.saved_messages, getString(R.string.AudioSaveToMyProfileSaved))
                 .show();
         });
-        playerLayout.addView(saveToProfileButton, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, 42, Gravity.FILL_HORIZONTAL | Gravity.BOTTOM, 12, 12, 12, 12));
+        playerLayout.addView(saveToProfileButton, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, 42, Gravity.FILL_HORIZONTAL | Gravity.BOTTOM, 12, 12, 72, 12));
 
         unsaveFromProfileButton = new ButtonWithCounterView(context, resourcesProvider).setRound().setNeutral();
         unsaveFromProfileButton.setText(getString(R.string.AudioRemoveFromProfile));
@@ -1298,7 +1301,15 @@ public class AudioPlayerAlert extends BottomSheet implements NotificationCenter.
                 .createSimpleBulletin(R.raw.ic_delete, getString(R.string.AudioSaveToMyProfileUnsaved))
                 .show();
         });
-        playerLayout.addView(unsaveFromProfileButton, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, 42, Gravity.FILL_HORIZONTAL | Gravity.BOTTOM, 12, 12, 12, 12));
+        playerLayout.addView(unsaveFromProfileButton, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, 42, Gravity.FILL_HORIZONTAL | Gravity.BOTTOM, 12, 12, 72, 12));
+
+        sleepTimerButton = new ButtonWithCounterView(context, resourcesProvider).setRound();
+        SpannableStringBuilder sleepTimerText = new SpannableStringBuilder("+");
+        sleepTimerText.setSpan(new ColoredImageSpan(R.drawable.filled_access_sleeping), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        sleepTimerButton.setText(sleepTimerText);
+        sleepTimerButton.setContentDescription(LocaleController.getString(R.string.SleepTimerNeko));
+        sleepTimerButton.setOnClickListener(v -> showSleepTimerDialog());
+        playerLayout.addView(sleepTimerButton, LayoutHelper.createFrame(48, 42, Gravity.RIGHT | Gravity.BOTTOM, 0, 12, 12, 12));
 
         savedMusicList = MediaController.getInstance().currentSavedMusicList;
         isProfilePlaylist = savedMusicList != null;
@@ -1402,6 +1413,7 @@ public class AudioPlayerAlert extends BottomSheet implements NotificationCenter.
         if (isMyList()) {
             saveToProfileButton.setVisibility(View.GONE);
             unsaveFromProfileButton.setVisibility(View.GONE);
+            sleepTimerButton.setVisibility(View.GONE);
 
             itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.Callback() {
                 @Override
@@ -3001,7 +3013,13 @@ public class AudioPlayerAlert extends BottomSheet implements NotificationCenter.
         if (isMyList() || noforwards) {
             saveToProfileButton.setVisibility(View.GONE);
             unsaveFromProfileButton.setVisibility(View.GONE);
+            if (sleepTimerButton != null) {
+                sleepTimerButton.setVisibility(isMyList() ? View.GONE : View.VISIBLE);
+            }
             return;
+        }
+        if (sleepTimerButton != null) {
+            sleepTimerButton.setVisibility(View.VISIBLE);
         }
         saveToProfileButton.setVisibility(View.VISIBLE);
         unsaveFromProfileButton.setVisibility(View.VISIBLE);
@@ -3025,6 +3043,65 @@ public class AudioPlayerAlert extends BottomSheet implements NotificationCenter.
                 unsaveFromProfileButton.setVisibility(visible ? View.VISIBLE : View.GONE);
             })
             .start();
+    }
+
+    private void showSleepTimerDialog() {
+        ArrayList<CharSequence> items = new ArrayList<>();
+        ArrayList<Integer> seconds = new ArrayList<>();
+        if (SleepTimerHelper.isActive()) {
+            items.add(LocaleController.getString(R.string.SleepTimerDisableNeko));
+            seconds.add(0);
+        }
+        addSleepTimerItem(items, seconds, 1 * 60);
+        addSleepTimerItem(items, seconds, 5 * 60);
+        addSleepTimerItem(items, seconds, 10 * 60);
+        addSleepTimerItem(items, seconds, 20 * 60);
+        addSleepTimerItem(items, seconds, 40 * 60);
+        addSleepTimerItem(items, seconds, 60 * 60);
+        items.add(LocaleController.getString(R.string.AutoDownloadCustom));
+        seconds.add(-1);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), resourcesProvider);
+        builder.setTitle(LocaleController.getString(R.string.SleepTimerNeko));
+        builder.setItems(items.toArray(new CharSequence[0]), (dialog, which) -> {
+            int value = seconds.get(which);
+            if (value == -1) {
+                AlertsCreator.createTimePickerDialog(getContext(), LocaleController.getString(R.string.SleepTimerNeko), 30, 1, 12 * 60, minutes -> setSleepTimer(minutes * 60));
+            } else {
+                setSleepTimer(value);
+            }
+        });
+        builder.setNegativeButton(LocaleController.getString(R.string.Cancel), null);
+        builder.show();
+    }
+
+    private void addSleepTimerItem(ArrayList<CharSequence> items, ArrayList<Integer> seconds, int value) {
+        items.add(formatSleepTimerDuration(value));
+        seconds.add(value);
+    }
+
+    private void setSleepTimer(int seconds) {
+        boolean wasActive = SleepTimerHelper.isActive();
+        if (seconds > 0) {
+            SleepTimerHelper.schedule(seconds);
+            BulletinFactory.of((FrameLayout) containerView, resourcesProvider)
+                .createSimpleBulletin(R.raw.done, LocaleController.formatString(R.string.SleepTimerSetNeko, formatSleepTimerDuration(seconds)))
+                .show();
+        } else {
+            SleepTimerHelper.cancel();
+            if (wasActive) {
+                BulletinFactory.of((FrameLayout) containerView, resourcesProvider)
+                    .createSimpleBulletin(R.raw.done, LocaleController.getString(R.string.SleepTimerDisabledNeko))
+                    .show();
+            }
+        }
+    }
+
+    private String formatSleepTimerDuration(int seconds) {
+        if (seconds >= 60 * 60 && seconds % (60 * 60) == 0) {
+            return LocaleController.formatPluralString("Hours", seconds / (60 * 60));
+        }
+        return LocaleController.formatPluralString("Minutes", Math.max(1, seconds / 60));
     }
 
     private void saveToMusic(MessageObject messageObject) {

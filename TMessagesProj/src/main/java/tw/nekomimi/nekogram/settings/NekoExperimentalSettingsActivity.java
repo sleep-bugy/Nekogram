@@ -35,6 +35,8 @@ import tw.nekomimi.nekogram.helpers.remote.UpdateHelper;
 
 public class NekoExperimentalSettingsActivity extends BaseNekoSettingsActivity {
 
+    private boolean isCheckingUpdate = false;
+
     private final int downloadSpeedBoostRow = rowId++;
     private final int keepFormattingRow = rowId++;
     private final int autoInlineBotRow = rowId++;
@@ -257,16 +259,21 @@ public class NekoExperimentalSettingsActivity extends BaseNekoSettingsActivity {
                 ((TextCheckCell) view).setChecked(NekoConfig.keepFormatting);
             }
         } else if (id == checkUpdateRow) {
+            if (isCheckingUpdate) return;
             if (getParentActivity() instanceof LaunchActivity launchActivity) {
+                isCheckingUpdate = true;
+                item.subtext = LocaleController.getString(R.string.CheckingUpdate);
+                listView.adapter.notifyItemChanged(position);
                 launchActivity.checkAppUpdate(true, new Browser.Progress() {
                     @Override
+                    public void init() {}
+                    @Override
                     public void end() {
+                        isCheckingUpdate = false;
                         item.subtext = UpdateHelper.formatDateUpdate(SharedConfig.lastUpdateCheckTime);
                         listView.adapter.notifyItemChanged(position);
                     }
                 });
-                item.subtext = LocaleController.getString(R.string.CheckingUpdate);
-                listView.adapter.notifyItemChanged(position);
             }
         }
     }

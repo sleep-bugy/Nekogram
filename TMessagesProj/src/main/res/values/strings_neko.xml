@@ -15,6 +15,8 @@
     <string name="MessageFiltersExactMatchDesc">Avoid filtering text when a keyword appears only as part of a larger word.</string>
     <string name="MessageFiltersRules">%1$d rules</string>
     <string name="MessageFiltersAbout">Hide matching messages under a spoiler. Use one keyword or phrase per line.</string>
+    <string name="MessageFiltersTransparent">Fade filtered messages</string>
+    <string name="MessageFiltersTransparentDesc">Draw filtered messages at lower opacity instead of making them visually as strong as regular messages.</string>
     <string name="HidePhone">Hide my phone number</string>
     <string name="DeleteAllFromSelf">Delete own messages</string>
     <string name="DeleteAllFromSelfAlert">Warning! This will **delete all messages from you** in this chat for **all** participants.</string>
@@ -27,6 +29,13 @@
     <string name="QuickSwitchFolderNekoHint">Long press the Chats tab to switch folders quickly.</string>
     <string name="ShowActiveFolderTitle">Show active folder in header</string>
     <string name="ShowActiveFolderTitleDesc">Replace the app name with the current folder name when a folder tab is selected.</string>
+    <string name="SortFoldersByUnread">Sort folders by unread</string>
+    <string name="SortFoldersByUnreadDesc">Keep pinned chats first, then show unread chats before read chats inside folders.</string>
+    <string name="SortFoldersByDate">Sort folders by date</string>
+    <string name="SleepTimerNeko">Sleep timer</string>
+    <string name="SleepTimerDisableNeko">Disable sleep timer</string>
+    <string name="SleepTimerSetNeko">Playback will pause in %1$s.</string>
+    <string name="SleepTimerDisabledNeko">Sleep timer disabled.</string>
     <string name="IgnoreBlocked">Hide messages from blocked user</string>
     <string name="Connection">Connection</string>
     <string name="Chat">Chat</string>

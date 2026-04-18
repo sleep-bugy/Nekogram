@@ -1,4 +1,8 @@
 Changelog:
+- Fix: native crash (SIGABRT) in ConnectionsManager when playing music
+- Fix: music stops/crashes when app goes to background (foreground service fix)
+- Fix: "Check for Update" button unresponsive after first use
+- Fix: auto-install APK after download completes
 - Sleep timer for audio player
 - Sort folders by unread
 - Fade filtered messages (transparent message filters)

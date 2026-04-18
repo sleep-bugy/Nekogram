@@ -653,7 +653,7 @@ public class ApplicationLoader extends Application {
     }
 
     public boolean showCustomUpdateAppPopup(Context context, BetaUpdate update, int account) {
-        return false;
+        return tw.nekomimi.nekogram.helpers.RepoUpdateHelper.getInstance().showUpdatePopup(context, update, account);
     }
 
     public IUpdateLayout takeUpdateLayout(Activity activity, ViewGroup sideMenuContainer) {
@@ -701,24 +701,38 @@ public class ApplicationLoader extends Application {
     }
 
     public boolean isCustomUpdate() {
-        return false;
+        return tw.nekomimi.nekogram.helpers.RepoUpdateHelper.getInstance().isEnabled();
     }
-    public void downloadUpdate() {}
-    public void cancelDownloadingUpdate() {}
+    
+    public void downloadUpdate() {
+        tw.nekomimi.nekogram.helpers.RepoUpdateHelper.getInstance().downloadUpdate();
+    }
+    
+    public void cancelDownloadingUpdate() {
+        tw.nekomimi.nekogram.helpers.RepoUpdateHelper.getInstance().cancelDownloadingUpdate();
+    }
+    
     public boolean isDownloadingUpdate() {
-        return false;
+        return tw.nekomimi.nekogram.helpers.RepoUpdateHelper.getInstance().isDownloadingUpdate();
     }
+    
     public float getDownloadingUpdateProgress() {
-        return 0.0f;
+        return tw.nekomimi.nekogram.helpers.RepoUpdateHelper.getInstance().getDownloadingUpdateProgress();
     }
-    public void checkUpdate(boolean force, Runnable whenDone) {}
+    
+    public void checkUpdate(boolean force, Runnable whenDone) {
+        tw.nekomimi.nekogram.helpers.RepoUpdateHelper.getInstance().checkUpdate(force, whenDone);
+    }
+    
     public BetaUpdate getUpdate() {
-        return null;
+        return tw.nekomimi.nekogram.helpers.RepoUpdateHelper.getInstance().getUpdate();
     }
+    
     public String getUpdateCheckError() {
-        return null;
+        return tw.nekomimi.nekogram.helpers.RepoUpdateHelper.getInstance().getLastError();
     }
+    
     public File getDownloadedUpdateFile() {
-        return null;
+        return tw.nekomimi.nekogram.helpers.RepoUpdateHelper.getInstance().getDownloadedUpdateFile();
     }
 }

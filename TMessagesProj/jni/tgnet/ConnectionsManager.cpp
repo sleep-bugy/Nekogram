@@ -167,15 +167,28 @@ ConnectionsManager& ConnectionsManager::getInstance(int32_t instanceNum) {
 
 int ConnectionsManager::callEvents(int64_t now) {
     if (!events.empty()) {
+        // Collect expired events first to avoid use-after-free:
+        // onEvent() may re-schedule or delete the EventObject, which would
+        // corrupt the list if we call onEvent() during iteration.
+        std::vector<EventObject *> toFire;
+        int nextWait = 1000;
         for (auto iter = events.begin(); iter != events.end();) {
             EventObject *eventObject = (*iter);
             if (eventObject->time <= now) {
                 iter = events.erase(iter);
-                eventObject->onEvent(0);
+                toFire.push_back(eventObject);
             } else {
                 int diff = (int) (eventObject->time - now);
-                return diff > 1000 || diff < 0 ? 1000 : diff;
+                nextWait = diff > 1000 || diff < 0 ? 1000 : diff;
+                break;
             }
+        }
+        for (auto eventObject : toFire) {
+            eventObject->onEvent(0);
+        }
+        if (!toFire.empty()) {
+            // Return 0 so select() won't wait and will pick up re-scheduled events
+            return nextWait;
         }
     }
     if (!networkPaused) {

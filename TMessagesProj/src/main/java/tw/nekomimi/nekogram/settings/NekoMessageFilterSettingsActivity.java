@@ -29,12 +29,14 @@ public class NekoMessageFilterSettingsActivity extends BaseNekoSettingsActivity 
     private final int enableRow = rowId++;
     private final int keywordsRow = rowId++;
     private final int exactMatchRow = rowId++;
+    private final int transparentRow = rowId++;
 
     @Override
     protected void fillItems(ArrayList<UItem> items, UniversalAdapter adapter) {
         items.add(UItem.asCheck(enableRow, LocaleController.getString(R.string.MessageFiltersEnabled)).setChecked(NekoConfig.enableMessageFilter));
         items.add(UItem.asButton(keywordsRow, LocaleController.getString(R.string.MessageFiltersKeywords), getKeywordsValue()));
         items.add(UItem.asCheck(exactMatchRow, LocaleController.getString(R.string.MessageFiltersExactMatch), LocaleController.getString(R.string.MessageFiltersExactMatchDesc)).setChecked(NekoConfig.messageFilterExactMatch));
+        items.add(UItem.asCheck(transparentRow, LocaleController.getString(R.string.MessageFiltersTransparent), LocaleController.getString(R.string.MessageFiltersTransparentDesc)).setChecked(NekoConfig.messageFilterTransparent));
         items.add(UItem.asShadow(LocaleController.getString(R.string.MessageFiltersAbout)));
     }
 
@@ -50,6 +52,11 @@ public class NekoMessageFilterSettingsActivity extends BaseNekoSettingsActivity 
             NekoConfig.toggleMessageFilterExactMatch();
             if (view instanceof TextCheckCell) {
                 ((TextCheckCell) view).setChecked(NekoConfig.messageFilterExactMatch);
+            }
+        } else if (id == transparentRow) {
+            NekoConfig.toggleMessageFilterTransparent();
+            if (view instanceof TextCheckCell) {
+                ((TextCheckCell) view).setChecked(NekoConfig.messageFilterTransparent);
             }
         } else if (id == keywordsRow) {
             showKeywordsDialog(item, position);

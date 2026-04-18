@@ -450,23 +450,13 @@ public class MusicPlayerService extends Service implements NotificationCenter.No
 
             notification = bldr.build();
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                if (!foregroundServiceIsStarted) {
+            if (!foregroundServiceIsStarted) {
                     foregroundServiceIsStarted = true;
                     startForeground(ID_NOTIFICATION, notification);
                 } else {
                     NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
                     nm.notify(ID_NOTIFICATION, notification);
                 }
-            } else {
-                if (isPlaying) {
-                    startForeground(ID_NOTIFICATION, notification);
-                } else {
-                    stopForeground(false);
-                    NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-                    nm.notify(ID_NOTIFICATION, notification);
-                }
-            }
 
         } else {
             RemoteViews simpleContentView = new RemoteViews(getApplicationContext().getPackageName(), R.layout.player_small_notification);

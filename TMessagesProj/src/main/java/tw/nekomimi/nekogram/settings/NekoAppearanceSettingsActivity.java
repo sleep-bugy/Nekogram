@@ -38,6 +38,7 @@ public class NekoAppearanceSettingsActivity extends BaseNekoSettingsActivity imp
     private final int hideAllTabRow = rowId++;
     private final int manageFoldersRow = rowId++;
     private final int showActiveFolderTitleRow = rowId++;
+    private final int sortFoldersByUnreadRow = rowId++;
     private final int tabsTitleTypeRow = rowId++;
     private final int tabsPositionRow = rowId++;
 
@@ -87,6 +88,7 @@ public class NekoAppearanceSettingsActivity extends BaseNekoSettingsActivity imp
         items.add(TextSettingsCellFactory.of(manageFoldersRow, LocaleController.getString(R.string.SettingsFolders), LocaleController.getString(R.string.SettingsFoldersInfo)).slug("manageFolders"));
         items.add(UItem.asCheck(showActiveFolderTitleRow, LocaleController.getString(R.string.ShowActiveFolderTitle), LocaleController.getString(R.string.ShowActiveFolderTitleDesc)).slug("showActiveFolderTitle").setChecked(NekoConfig.showActiveFolderTitle));
         items.add(UItem.asCheck(hideAllTabRow, LocaleController.getString(R.string.HideAllTab)).slug("hideAllTab").setChecked(NekoConfig.hideAllTab));
+        items.add(UItem.asCheck(sortFoldersByUnreadRow, LocaleController.getString(R.string.SortFoldersByUnread), LocaleController.getString(R.string.SortFoldersByUnreadDesc)).slug("sortFoldersByUnread").setChecked(NekoConfig.sortFoldersByUnread));
         items.add(TextSettingsCellFactory.of(tabsTitleTypeRow, LocaleController.getString(R.string.TabTitleType), switch (NekoConfig.tabsTitleType) {
             case NekoConfig.TITLE_TYPE_TEXT ->
                     LocaleController.getString(R.string.TabTitleTypeText);
@@ -170,6 +172,13 @@ public class NekoAppearanceSettingsActivity extends BaseNekoSettingsActivity imp
             }
             getNotificationCenter().postNotificationName(NotificationCenter.dialogFiltersUpdated);
             getNotificationCenter().postNotificationName(NotificationCenter.mainUserInfoChanged);
+        } else if (id == sortFoldersByUnreadRow) {
+            NekoConfig.toggleSortFoldersByUnread();
+            if (view instanceof TextCheckCell) {
+                ((TextCheckCell) view).setChecked(NekoConfig.sortFoldersByUnread);
+            }
+            org.telegram.ui.DialogsActivity.dialogsLoaded[currentAccount] = false;
+            getNotificationCenter().postNotificationName(NotificationCenter.dialogsNeedReload);
         } else if (id == tabsTitleTypeRow) {
             ArrayList<String> arrayList = new ArrayList<>();
             ArrayList<Integer> types = new ArrayList<>();

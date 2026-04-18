@@ -341,12 +341,8 @@ public final class RepoUpdateHelper {
         if (launchActivity == null || apk == null) {
             return;
         }
-        launchActivity.showBulletin(factory -> factory.createSimpleBulletin(
-                R.raw.chats_infotip,
-                LocaleController.getString(R.string.UpdateNekogram),
-                LocaleController.getString(R.string.Open),
-                () -> ApkInstaller.installUpdate(launchActivity, apk)
-        ));
+        // Auto-trigger install immediately after download
+        ApkInstaller.installUpdate(launchActivity, apk);
     }
 
     private void showDownloadFailure(String reason) {

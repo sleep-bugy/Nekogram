@@ -812,6 +812,8 @@
             </intent-filter>
         </receiver>
 
+        <receiver android:name="tw.nekomimi.nekogram.helpers.SleepTimerHelper$Receiver" android:exported="false" />
+
         <provider
             android:authorities="${applicationId}.streaming"
             android:name="tw.nekomimi.nekogram.streaming.MediaStreamingProvider"
