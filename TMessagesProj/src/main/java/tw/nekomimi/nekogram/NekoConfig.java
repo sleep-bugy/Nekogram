@@ -69,9 +69,14 @@ public class NekoConfig {
     public static boolean ignoreBlocked = false;
     public static boolean enableMessageFilter = false;
     public static boolean messageFilterExactMatch = false;
+    public static boolean messageFilterTransparent = false;
     public static boolean hideKeyboardOnChatScroll = false;
     public static boolean rearVideoMessages = false;
+    public static boolean disableUnarchiveSwipe = false;
+    public static boolean hideSideShareButton = false;
+    public static boolean hidePhotoCounter = false;
     public static boolean hideAllTab = false;
+    public static boolean sortFoldersByUnread = false;
     public static boolean confirmAVMessage = false;
     public static boolean askBeforeCall = true;
     public static boolean disableNumberRounding = false;
@@ -177,6 +182,7 @@ public class NekoConfig {
             ignoreBlocked = preferences.getBoolean("ignoreBlocked2", false);
             enableMessageFilter = preferences.getBoolean("enableMessageFilter", false);
             messageFilterExactMatch = preferences.getBoolean("messageFilterExactMatch", false);
+            messageFilterTransparent = preferences.getBoolean("messageFilterTransparent", false);
             tabletMode = preferences.getInt("tabletMode", TABLET_AUTO);
             nameOrder = preferences.getInt("nameOrder", 1);
             showAddToSavedMessages = preferences.getBoolean("showAddToSavedMessages", true);
@@ -193,7 +199,11 @@ public class NekoConfig {
             hideKeyboardOnChatScroll = preferences.getBoolean("hideKeyboardOnChatScroll", false);
             useSystemEmoji = preferences.getBoolean("useSystemEmoji", false);
             rearVideoMessages = preferences.getBoolean("rearVideoMessages", false);
+            disableUnarchiveSwipe = preferences.getBoolean("disableUnarchiveSwipe", false);
+            hideSideShareButton = preferences.getBoolean("hideSideShareButton", false);
+            hidePhotoCounter = preferences.getBoolean("hidePhotoCounter", false);
             hideAllTab = preferences.getBoolean("hideAllTab", false);
+            sortFoldersByUnread = preferences.getBoolean("sortFoldersByUnread", false);
             tabsTitleType = preferences.getInt("tabsTitleType2", TITLE_TYPE_MIX);
             confirmAVMessage = preferences.getBoolean("confirmAVMessage", false);
             askBeforeCall = preferences.getBoolean("askBeforeCall", true);
@@ -677,6 +687,14 @@ public class NekoConfig {
         editor.apply();
     }
 
+    public static void toggleMessageFilterTransparent() {
+        messageFilterTransparent = !messageFilterTransparent;
+        SharedPreferences preferences = ApplicationLoader.applicationContext.getSharedPreferences("nekoconfig", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean("messageFilterTransparent", messageFilterTransparent);
+        editor.apply();
+    }
+
     public static void setMessageFilterKeywords(String keywords) {
         messageFilterKeywords = keywords == null ? "" : keywords;
         SharedPreferences preferences = ApplicationLoader.applicationContext.getSharedPreferences("nekoconfig", Activity.MODE_PRIVATE);
@@ -773,11 +791,43 @@ public class NekoConfig {
         editor.apply();
     }
 
+    public static void toggleDisableUnarchiveSwipe() {
+        disableUnarchiveSwipe = !disableUnarchiveSwipe;
+        SharedPreferences preferences = ApplicationLoader.applicationContext.getSharedPreferences("nekoconfig", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean("disableUnarchiveSwipe", disableUnarchiveSwipe);
+        editor.apply();
+    }
+
+    public static void toggleHideSideShareButton() {
+        hideSideShareButton = !hideSideShareButton;
+        SharedPreferences preferences = ApplicationLoader.applicationContext.getSharedPreferences("nekoconfig", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean("hideSideShareButton", hideSideShareButton);
+        editor.apply();
+    }
+
+    public static void toggleHidePhotoCounter() {
+        hidePhotoCounter = !hidePhotoCounter;
+        SharedPreferences preferences = ApplicationLoader.applicationContext.getSharedPreferences("nekoconfig", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean("hidePhotoCounter", hidePhotoCounter);
+        editor.apply();
+    }
+
     public static void toggleHideAllTab() {
         hideAllTab = !hideAllTab;
         SharedPreferences preferences = ApplicationLoader.applicationContext.getSharedPreferences("nekoconfig", Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean("hideAllTab", hideAllTab);
+        editor.apply();
+    }
+
+    public static void toggleSortFoldersByUnread() {
+        sortFoldersByUnread = !sortFoldersByUnread;
+        SharedPreferences preferences = ApplicationLoader.applicationContext.getSharedPreferences("nekoconfig", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean("sortFoldersByUnread", sortFoldersByUnread);
         editor.apply();
     }
 

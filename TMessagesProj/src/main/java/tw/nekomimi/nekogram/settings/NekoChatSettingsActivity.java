@@ -74,6 +74,8 @@ public class NekoChatSettingsActivity extends BaseNekoSettingsActivity implement
 
     private final int voiceEnhancementsRow = rowId++;
     private final int rearVideoMessagesRow = rowId++;
+    private final int hideSideShareButtonRow = rowId++;
+    private final int hidePhotoCounterRow = rowId++;
     private final int confirmAVRow = rowId++;
     private final int disableProximityEventsRow = rowId++;
     private final int disableVoiceMessageAutoPlayRow = rowId++;
@@ -209,6 +211,8 @@ public class NekoChatSettingsActivity extends BaseNekoSettingsActivity implement
             items.add(UItem.asCheck(voiceEnhancementsRow, LocaleController.getString(R.string.VoiceEnhancements), LocaleController.getString(R.string.VoiceEnhancementsAbout)).slug("voiceEnhancements").setChecked(NekoConfig.voiceEnhancements));
         }
         items.add(UItem.asCheck(rearVideoMessagesRow, LocaleController.getString(R.string.RearVideoMessages)).slug("rearVideoMessages").setChecked(NekoConfig.rearVideoMessages));
+        items.add(UItem.asCheck(hideSideShareButtonRow, LocaleController.getString("HideSideShareButton", R.string.HideSideShareButton)).slug("hideSideShareButton").setChecked(NekoConfig.hideSideShareButton));
+        items.add(UItem.asCheck(hidePhotoCounterRow, LocaleController.getString("HidePhotoCounter", R.string.HidePhotoCounter)).slug("hidePhotoCounter").setChecked(NekoConfig.hidePhotoCounter));
         items.add(UItem.asCheck(confirmAVRow, LocaleController.getString(R.string.ConfirmAVMessage)).slug("confirmAV").setChecked(NekoConfig.confirmAVMessage));
         items.add(UItem.asCheck(disableProximityEventsRow, LocaleController.getString(R.string.DisableProximityEvents)).slug("disableProximityEvents").setChecked(NekoConfig.disableProximityEvents));
         items.add(UItem.asCheck(disableVoiceMessageAutoPlayRow, LocaleController.getString(R.string.DisableVoiceMessagesAutoPlay)).slug("disableVoiceMessageAutoPlay").setChecked(NekoConfig.disableVoiceMessageAutoPlay));
@@ -252,6 +256,16 @@ public class NekoChatSettingsActivity extends BaseNekoSettingsActivity implement
             NekoConfig.toggleRearVideoMessages();
             if (view instanceof TextCheckCell) {
                 ((TextCheckCell) view).setChecked(NekoConfig.rearVideoMessages);
+            }
+        } else if (id == hideSideShareButtonRow) {
+            NekoConfig.toggleHideSideShareButton();
+            if (view instanceof TextCheckCell) {
+                ((TextCheckCell) view).setChecked(NekoConfig.hideSideShareButton);
+            }
+        } else if (id == hidePhotoCounterRow) {
+            NekoConfig.toggleHidePhotoCounter();
+            if (view instanceof TextCheckCell) {
+                ((TextCheckCell) view).setChecked(NekoConfig.hidePhotoCounter);
             }
         } else if (id == confirmAVRow) {
             NekoConfig.toggleConfirmAVMessage();

@@ -18493,6 +18493,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
 
     protected boolean checkNeedDrawShareButton(MessageObject messageObject) {
         if (isReportChat) return false;
+        if (tw.nekomimi.nekogram.NekoConfig.hideSideShareButton) return false;
         if (currentMessageObject.deleted && !currentMessageObject.deletedByThanos) return false;
         if (currentMessageObject.isSponsored()) return false;
         if (currentMessagesGroup != null && currentPosition != null) {
@@ -19902,6 +19903,9 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
         }
 
         final int restore = canvas.getSaveCount();
+        if (NekoConfig.messageFilterTransparent && currentMessageObject.shouldBlockMessage()) {
+            canvas.saveLayerAlpha(null, (int) (255 * 0.75f), Canvas.ALL_SAVE_FLAG);
+        }
         int restoreToSponosoredAlpha = -1;
         if (sponosoredAlpha != 255) {
             restoreToSponosoredAlpha = canvas.saveLayerAlpha(0, 0, getMeasuredWidth(), getMeasuredHeight(), sponosoredAlpha);

@@ -791,6 +791,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
         @Override
         protected void onDraw(Canvas canvas) {
             super.onDraw(canvas);
+            if (tw.nekomimi.nekogram.NekoConfig.hidePhotoCounter) return;
 
             float show = this.showT.set(shown ? 1 : 0);
 

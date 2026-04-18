@@ -2425,6 +2425,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                     swipeFolderBack = false;
                     swipingFolder = (canSwipeBack && !DialogObject.isFolderDialogId(dialogCell.getDialogId())) || (SharedConfig.archiveHidden && DialogObject.isFolderDialogId(dialogCell.getDialogId()));
                     dialogCell.setSliding(true);
+                    if (folderId == 1 && tw.nekomimi.nekogram.NekoConfig.disableUnarchiveSwipe) return 0;
                     return makeMovementFlags(0, ItemTouchHelper.LEFT);
                 }
             }
@@ -3780,6 +3781,12 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                             })
                             .addIf(hasUnread, R.drawable.msg_markread, LocaleController.getString(R.string.MarkAllAsRead), () -> {
                                 markDialogsAsRead(dialogs);
+                            })
+                            .add(NekoConfig.sortFoldersByUnread ? R.drawable.menu_sort_date : R.drawable.filter_unread, NekoConfig.sortFoldersByUnread ? LocaleController.getString(R.string.SortFoldersByDate) : LocaleController.getString(R.string.SortFoldersByUnread), () -> {
+                                NekoConfig.toggleSortFoldersByUnread();
+                                dialogsLoaded[currentAccount] = false;
+                                loadDialogs(getAccountInstance());
+                                getMessagesController().loadPinnedDialogs(folderId, 0, null);
                             })
                             .addIf(hasShare, R.drawable.msg_share, FilterCreateActivity.withNew(filter != null && filter.isMyChatlist() ? -1 : 0, LocaleController.getString(R.string.LinkActionShare), true), () -> {
                                 if (shareEmpty[0]) {

@@ -1,0 +1,15 @@
+Changelog:
+- [AI Editor](https://telegram.org/blog/ai-editor-mighty-polls-and-more)
+- Upstream to 12.6.4
+- Fix ItemOptions Backgroud blur position
+- Add Icon to Login Menu
+- Use Original Translate Code When Provider is Telegram
+- Add OTA Update by Project Sleep
+- Fix Notification For Some Device cant Show
+- Sleep timer for audio player
+- Sort folders by unread
+- Fade filtered messages (transparent message filters)
+- Add comma after mention
+- Disable unarchive swipe
+- Hide side share button
+- Hide photo counter

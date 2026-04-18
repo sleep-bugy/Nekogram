@@ -635,16 +635,16 @@ public class MentionsContainerView extends FrameLayout implements NotificationCe
                 TLRPC.Chat chat = (TLRPC.Chat) object;
                 String username = ChatObject.getPublicUsername(chat);
                 if (username != null) {
-                    delegate.replaceText(start, len, "@" + username + " " , false);
+                    delegate.replaceText(start, len, "@" + username + ", " , false);
                 }
             } else if (object instanceof TLRPC.User) {
                 TLRPC.User user = (TLRPC.User) object;
 
                 if (UserObject.getPublicUsername(user) != null) {
-                    delegate.replaceText(start, len, "@" + UserObject.getPublicUsername(user) + " ", false);
+                    delegate.replaceText(start, len, "@" + UserObject.getPublicUsername(user) + ", ", false);
                 } else {
                     String name = UserObject.getFirstName(user, false);
-                    Spannable spannable = new SpannableString(name + " ");
+                    Spannable spannable = new SpannableString(name + ", ");
                     spannable.setSpan(new URLSpanUserMention("" + user.id, 3), 0, spannable.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                     delegate.replaceText(start, len, spannable, false);
                 }
@@ -704,7 +704,7 @@ public class MentionsContainerView extends FrameLayout implements NotificationCe
             if (object instanceof TLRPC.User) {
                 TLRPC.User user = (TLRPC.User) object;
                 String name = UserObject.getFirstName(user, false);
-                Spannable spannable = new SpannableString(name + " ");
+                Spannable spannable = new SpannableString(name + ", ");
                 spannable.setSpan(new URLSpanUserMention("" + user.id, 3), 0, spannable.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 delegate.replaceText(start, len, spannable, false);
                 return true;

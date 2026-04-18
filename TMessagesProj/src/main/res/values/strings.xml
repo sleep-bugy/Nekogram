@@ -10658,4 +10658,8 @@
     <string name="AIEditorEmojify">emojify</string>
     <string name="TranslateCopy">Copy Translation</string>
     <string name="TranslateEntireChat">Translate Entire Chat</string>
+    
+    <string name="HideSideShareButton">Hide side share button</string>
+    <string name="HidePhotoCounter">Hide photo viewer counter</string>
+    <string name="DisableUnarchiveSwipe">Disable swipe to unarchive</string>
 </resources>
