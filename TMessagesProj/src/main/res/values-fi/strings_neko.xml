@@ -18,4 +18,20 @@
     <string name="DisableResidentNotification">Poista asukasilmoitus käytöstä</string>
     <string name="IdTypeHidden">Piilota</string>
     <!-- Accessibility -->
+    <string name="MessageFiltersNeko">Viestisuodattimet</string>
+    <string name="MessageFiltersEnabled">Ota suodattimet käyttöön</string>
+    <string name="MessageFiltersKeywords">Avainsanat ja lauseet</string>
+    <string name="MessageFiltersKeywordsHint">Yksi avainsana tai lause per rivi</string>
+    <string name="MessageFiltersKeywordsEmpty">Ei sääntöjä</string>
+    <string name="MessageFiltersExactMatch">Täsmää vain kokonaisiin sanoihin</string>
+    <string name="MessageFiltersExactMatchDesc">Vältä tekstin suodattamista, kun avainsana esiintyy vain osana pidempää sanaa.</string>
+    <string name="MessageFiltersRules">%1$d sääntöä</string>
+    <string name="MessageFiltersAbout">Piilota vastaavat viestit spoilerin alle. Käytä yhtä avainsanaa tai lausetta per rivi.</string>
+    <string name="AccountOrderNeko">Tilit</string>
+    <string name="AccountOrderNekoDesc">Järjestä aktiiviset tilit uudelleen</string>
+    <string name="AccountOrderHintNeko">Paina pitkään ja vedä tiliä muuttaaksesi järjestystä, jota tilinvaihtajat käyttävät.</string>
+    <string name="AccountLimitReachedNeko">Voit lisätä enintään %1$d tiliä.</string>
+    <string name="QuickSwitchFolderNekoHint">Paina pitkään Keskustelut-välilehteä vaihtaaksesi kansiota nopeasti.</string>
+    <string name="ShowActiveFolderTitle">Näytä aktiivinen kansio otsikossa</string>
+    <string name="ShowActiveFolderTitleDesc">Korvaa sovelluksen nimi nykyisen kansion nimellä, kun kansiovälilehti on valittuna.</string>
 </resources>

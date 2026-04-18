@@ -192,4 +192,20 @@
     <string name="IgnoreContentRestriction">Inhoudsbeperking negeren</string>
     <!-- Accessibility -->
     <string name="AccessibilitySettings">Toegankelijkheidsinstellingen</string>
+    <string name="MessageFiltersNeko">Berichtenfilters</string>
+    <string name="MessageFiltersEnabled">Filters inschakelen</string>
+    <string name="MessageFiltersKeywords">Trefwoorden en zinnen</string>
+    <string name="MessageFiltersKeywordsHint">Eén trefwoord of zin per regel</string>
+    <string name="MessageFiltersKeywordsEmpty">Geen regels</string>
+    <string name="MessageFiltersExactMatch">Alleen hele woorden overeen laten komen</string>
+    <string name="MessageFiltersExactMatchDesc">Voorkom het filteren van tekst wanneer een trefwoord alleen als onderdeel van een langer woord voorkomt.</string>
+    <string name="MessageFiltersRules">%1$d regels</string>
+    <string name="MessageFiltersAbout">Verberg overeenkomende berichten onder een spoiler. Gebruik één trefwoord of zin per regel.</string>
+    <string name="AccountOrderNeko">Accounts</string>
+    <string name="AccountOrderNekoDesc">Actieve accounts opnieuw ordenen</string>
+    <string name="AccountOrderHintNeko">Houd een account ingedrukt en sleep het om de volgorde te wijzigen die door accountwisselaars wordt gebruikt.</string>
+    <string name="AccountLimitReachedNeko">Je kunt maximaal %1$d accounts toevoegen.</string>
+    <string name="QuickSwitchFolderNekoHint">Houd het tabblad Gesprekken ingedrukt om snel van map te wisselen.</string>
+    <string name="ShowActiveFolderTitle">Actieve map in kop weergeven</string>
+    <string name="ShowActiveFolderTitleDesc">Vervang de appnaam door de naam van de huidige map wanneer een maptab is geselecteerd.</string>
 </resources>

@@ -57,6 +57,7 @@ public class NekoSettingsActivity extends BaseNekoSettingsActivity implements Fa
     private final List<ConfigHelper.News> newsList = new ArrayList<>();
 
     private final int generalRow = rowId++;
+    private final int accountsRow = rowId++;
     private final int appearanceRow = rowId++;
     private final int chatRow = rowId++;
     private final int passcodeRow = rowId++;
@@ -159,6 +160,7 @@ public class NekoSettingsActivity extends BaseNekoSettingsActivity implements Fa
         items.add(UItem.asCustomShadow(topView, 200 - 12));
 
         items.add(UItem.asButton(generalRow, R.drawable.msg_media, LocaleController.getString(R.string.General)).slug("general"));
+        items.add(UItem.asButton(accountsRow, R.drawable.settings_account, LocaleController.getString(R.string.AccountOrderNeko), LocaleController.getString(R.string.AccountOrderNekoDesc)).slug("accounts"));
         items.add(UItem.asButton(appearanceRow, R.drawable.msg_theme, LocaleController.getString(R.string.ChangeChannelNameColor2)).slug("appearance"));
         items.add(UItem.asButton(chatRow, R.drawable.msg_discussion, LocaleController.getString(R.string.Chat)).slug("chat"));
         if (!PasscodeHelper.isSettingsHidden()) {
@@ -202,6 +204,8 @@ public class NekoSettingsActivity extends BaseNekoSettingsActivity implements Fa
             presentFragment(new NekoChatSettingsActivity());
         } else if (id == generalRow) {
             presentFragment(new NekoGeneralSettingsActivity());
+        } else if (id == accountsRow) {
+            presentFragment(new NekoAccountsSettingsActivity());
         } else if (id == appearanceRow) {
             presentFragment(new NekoAppearanceSettingsActivity());
         } else if (id == passcodeRow) {
@@ -271,6 +275,8 @@ public class NekoSettingsActivity extends BaseNekoSettingsActivity implements Fa
     private static BaseNekoSettingsActivity createFragment(int icon) {
         if (icon == R.drawable.msg_media) {
             return new NekoGeneralSettingsActivity();
+        } else if (icon == R.drawable.settings_account) {
+            return new NekoAccountsSettingsActivity();
         } else if (icon == R.drawable.msg_theme) {
             return new NekoAppearanceSettingsActivity();
         } else if (icon == R.drawable.msg_discussion) {
@@ -285,6 +291,7 @@ public class NekoSettingsActivity extends BaseNekoSettingsActivity implements Fa
         var searchResultList = new ArrayList<SearchResult>();
         var icons = new int[]{
                 R.drawable.msg_media,
+                R.drawable.settings_account,
                 R.drawable.msg_theme,
                 R.drawable.msg_discussion,
                 R.drawable.msg_fave,

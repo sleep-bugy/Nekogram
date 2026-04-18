@@ -2,4 +2,20 @@
 <resources>
     <string name="NekoSettings">Неко</string>
     <!-- Accessibility -->
+    <string name="MessageFiltersNeko">Билдирүү чыпкалары</string>
+    <string name="MessageFiltersEnabled">Чыпкаларды күйгүзүү</string>
+    <string name="MessageFiltersKeywords">Ачкыч сөздөр жана сөз айкаштары</string>
+    <string name="MessageFiltersKeywordsHint">Ар бир сапка бир ачкыч сөз же сөз айкашы</string>
+    <string name="MessageFiltersKeywordsEmpty">Эрежелер жок</string>
+    <string name="MessageFiltersExactMatch">Толук сөздөрдү гана дал келтирүү</string>
+    <string name="MessageFiltersExactMatchDesc">Ачкыч сөз узунураак сөздүн бир бөлүгү катары гана кездешсе, текстти чыпкалоодон качыңыз.</string>
+    <string name="MessageFiltersRules">%1$d эреже</string>
+    <string name="MessageFiltersAbout">Дал келген билдирүүлөрдү спойлер астына жашырыңыз. Ар бир сапка бир ачкыч сөз же сөз айкашын колдонуңуз.</string>
+    <string name="AccountOrderNeko">Аккаунттар</string>
+    <string name="AccountOrderNekoDesc">Жигердүү аккаунттарды кайра иреттөө</string>
+    <string name="AccountOrderHintNeko">Аккаунт алмаштыргычтар колдонгон иретти өзгөртүү үчүн аккаунтту узак басып, сүйрөңүз.</string>
+    <string name="AccountLimitReachedNeko">Сиз %1$d аккаунтка чейин кошо аласыз.</string>
+    <string name="QuickSwitchFolderNekoHint">Папкаларды тез алмаштыруу үчүн Чаттар өтмөгүн узак басыңыз.</string>
+    <string name="ShowActiveFolderTitle">Жигердүү папканы баш аталышта көрсөтүү</string>
+    <string name="ShowActiveFolderTitleDesc">Папка өтмөгү тандалганда, колдонмонун атын учурдагы папканын атына алмаштырыңыз.</string>
 </resources>

@@ -313,4 +313,20 @@
     <string name="HideChannelBottomButtons">Schaltflächen am unteren Rand des Kanals ausblenden</string>
     <!-- Accessibility -->
     <string name="AccessibilitySettings">Zugangseinstellungen</string>
+    <string name="MessageFiltersNeko">Nachrichtenfilter</string>
+    <string name="MessageFiltersEnabled">Filter aktivieren</string>
+    <string name="MessageFiltersKeywords">Schlüsselwörter und Phrasen</string>
+    <string name="MessageFiltersKeywordsHint">Ein Schlüsselwort oder eine Phrase pro Zeile</string>
+    <string name="MessageFiltersKeywordsEmpty">Keine Regeln</string>
+    <string name="MessageFiltersExactMatch">Nur ganze Wörter abgleichen</string>
+    <string name="MessageFiltersExactMatchDesc">Vermeide das Filtern von Text, wenn ein Schlüsselwort nur als Teil eines längeren Wortes vorkommt.</string>
+    <string name="MessageFiltersRules">%1$d Regeln</string>
+    <string name="MessageFiltersAbout">Verstecke passende Nachrichten unter einem Spoiler. Verwende ein Schlüsselwort oder eine Phrase pro Zeile.</string>
+    <string name="AccountOrderNeko">Konten</string>
+    <string name="AccountOrderNekoDesc">Aktive Konten neu anordnen</string>
+    <string name="AccountOrderHintNeko">Halte ein Konto gedrückt und ziehe es, um die von den Kontowechslern verwendete Reihenfolge zu ändern.</string>
+    <string name="AccountLimitReachedNeko">Du kannst bis zu %1$d Konten hinzufügen.</string>
+    <string name="QuickSwitchFolderNekoHint">Halte den Chat-Tab gedrückt, um schnell zwischen Ordnern zu wechseln.</string>
+    <string name="ShowActiveFolderTitle">Aktiven Ordner im Kopfbereich anzeigen</string>
+    <string name="ShowActiveFolderTitleDesc">Ersetze den App-Namen durch den Namen des aktuellen Ordners, wenn ein Ordner-Tab ausgewählt ist.</string>
 </resources>

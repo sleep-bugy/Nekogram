@@ -99,4 +99,20 @@
     <string name="WsProvider">Forsørger</string>
     <string name="DatacenterStatusShort">Datasenter</string>
     <!-- Accessibility -->
+    <string name="MessageFiltersNeko">Meldingsfiltre</string>
+    <string name="MessageFiltersEnabled">Aktiver filtre</string>
+    <string name="MessageFiltersKeywords">Nøkkelord og fraser</string>
+    <string name="MessageFiltersKeywordsHint">Ett nøkkelord eller én frase per linje</string>
+    <string name="MessageFiltersKeywordsEmpty">Ingen regler</string>
+    <string name="MessageFiltersExactMatch">Match bare hele ord</string>
+    <string name="MessageFiltersExactMatchDesc">Unngå å filtrere tekst når et nøkkelord bare vises som en del av et lengre ord.</string>
+    <string name="MessageFiltersRules">%1$d regler</string>
+    <string name="MessageFiltersAbout">Skjul matchende meldinger under en spoiler. Bruk ett nøkkelord eller én frase per linje.</string>
+    <string name="AccountOrderNeko">Kontoer</string>
+    <string name="AccountOrderNekoDesc">Endre rekkefølge på aktive kontoer</string>
+    <string name="AccountOrderHintNeko">Trykk og hold, og dra en konto for å endre rekkefølgen som brukes av kontobytterne.</string>
+    <string name="AccountLimitReachedNeko">Du kan legge til opptil %1$d kontoer.</string>
+    <string name="QuickSwitchFolderNekoHint">Trykk og hold på samtalefanen for å bytte mappe raskt.</string>
+    <string name="ShowActiveFolderTitle">Vis aktiv mappe i toppteksten</string>
+    <string name="ShowActiveFolderTitleDesc">Erstatt appnavnet med navnet på gjeldende mappe når en mappefane er valgt.</string>
 </resources>

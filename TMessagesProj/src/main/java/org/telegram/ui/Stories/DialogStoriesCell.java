@@ -161,6 +161,7 @@ public class DialogStoriesCell extends FrameLayout implements NotificationCenter
     private float collapsedProgress2;
     BaseFragment fragment;
     private CharSequence currentTitle;
+    private CharSequence customHeaderTitle;
     private boolean hasOverlayText;
     private int overlayTextId;
     private SpannableStringBuilder uploadingString;
@@ -447,6 +448,7 @@ public class DialogStoriesCell extends FrameLayout implements NotificationCenter
 
     public void setMenuItemsOffset(float menuItemsOffset) {
         this.menuItemsOffset = menuItemsOffset;
+        updateCurrentTitle(false);
     }
 
     public void openStoryForCell(StoryCell cell) {
@@ -598,41 +600,7 @@ public class DialogStoriesCell extends FrameLayout implements NotificationCenter
         if (!storiesController.hasSelfStories()) {
             size--;
         }
-        int totalCount;
-        boolean hidden = type == TYPE_ARCHIVE;
-        totalCount = Math.max(1, Math.max(storiesController.getTotalStoriesCount(hidden), size));
-
-        currentTitle = null;
-        if (storiesController.hasOnlySelfStories()) {
-            if (storiesController.hasUploadingStories(UserConfig.getInstance(currentAccount).getClientUserId())) {
-                String str = LocaleController.getString(R.string.UploadingStory);
-                int index = str.indexOf("…");
-                if (index > 0) {
-                    if (uploadingString == null) {
-                        SpannableStringBuilder spannableStringBuilder = SpannableStringBuilder.valueOf(str);
-                        UploadingDotsSpannable dotsSpannable = new UploadingDotsSpannable();
-                        spannableStringBuilder.setSpan(dotsSpannable, spannableStringBuilder.length() - 1, spannableStringBuilder.length(), 0);
-                        dotsSpannable.setParent(titleView, true);
-                        uploadingString = spannableStringBuilder;
-                    }
-                    currentTitle = uploadingString;
-                } else {
-                    currentTitle = str;
-                }
-            } else {
-                currentTitle = menuItemsOffset < dp(50) ? null :
-                    LocaleController.getString(R.string.MyStory);
-            }
-        } else {
-            currentTitle = menuItemsOffset < dp(50) ? null :
-                LocaleController.formatPluralString("Stories", totalCount);
-        }
-
-        if (!hasOverlayText) {
-            titleView.setText(currentTitle, animated && !LocaleController.isRTL);
-        }
-
-        animatorHasTitleText.setValue(!TextUtils.isEmpty(currentTitle) || hasOverlayText, animated);
+        updateCurrentTitle(animated);
 
         miniItems.clear();
         for (int i = 0; i < items.size(); i++) {
@@ -986,6 +954,56 @@ public class DialogStoriesCell extends FrameLayout implements NotificationCenter
                 AndroidUtilities.runOnUIThread(this::checkLoadMore);
             }
         }
+    }
+
+    private CharSequence buildCurrentTitle() {
+        if (!TextUtils.isEmpty(customHeaderTitle)) {
+            return menuItemsOffset < dp(50) ? null : customHeaderTitle;
+        }
+
+        int size = items.size();
+        if (!storiesController.hasSelfStories()) {
+            size--;
+        }
+        boolean hidden = type == TYPE_ARCHIVE;
+        int totalCount = Math.max(1, Math.max(storiesController.getTotalStoriesCount(hidden), size));
+
+        if (storiesController.hasOnlySelfStories()) {
+            if (storiesController.hasUploadingStories(UserConfig.getInstance(currentAccount).getClientUserId())) {
+                String str = LocaleController.getString(R.string.UploadingStory);
+                int index = str.indexOf("…");
+                if (index > 0) {
+                    if (uploadingString == null) {
+                        SpannableStringBuilder spannableStringBuilder = SpannableStringBuilder.valueOf(str);
+                        UploadingDotsSpannable dotsSpannable = new UploadingDotsSpannable();
+                        spannableStringBuilder.setSpan(dotsSpannable, spannableStringBuilder.length() - 1, spannableStringBuilder.length(), 0);
+                        dotsSpannable.setParent(titleView, true);
+                        uploadingString = spannableStringBuilder;
+                    }
+                    return uploadingString;
+                }
+                return str;
+            }
+            return menuItemsOffset < dp(50) ? null : LocaleController.getString(R.string.MyStory);
+        }
+        return menuItemsOffset < dp(50) ? null : LocaleController.formatPluralString("Stories", totalCount);
+    }
+
+    private void updateCurrentTitle(boolean animated) {
+        currentTitle = buildCurrentTitle();
+        if (!hasOverlayText) {
+            titleView.setText(currentTitle, animated && !LocaleController.isRTL);
+        }
+        animatorHasTitleText.setValue(!TextUtils.isEmpty(currentTitle) || hasOverlayText, animated);
+    }
+
+    public void setCustomHeaderTitle(CharSequence title, boolean animated) {
+        CharSequence normalizedTitle = TextUtils.isEmpty(title) ? null : title;
+        if (TextUtils.equals(customHeaderTitle, normalizedTitle)) {
+            return;
+        }
+        customHeaderTitle = normalizedTitle;
+        updateCurrentTitle(animated);
     }
 
     boolean collapsed;

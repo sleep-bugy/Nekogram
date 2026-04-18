@@ -6,11 +6,27 @@
     <string name="NekoSettings">Neko Settings</string>
     <string name="PreferIPv6">Prefer connecting through IPv6</string>
     <string name="MessageMenu">Message menu</string>
+    <string name="MessageFiltersNeko">Message filters</string>
+    <string name="MessageFiltersEnabled">Enable filters</string>
+    <string name="MessageFiltersKeywords">Keywords and phrases</string>
+    <string name="MessageFiltersKeywordsHint">One keyword or phrase per line</string>
+    <string name="MessageFiltersKeywordsEmpty">No rules</string>
+    <string name="MessageFiltersExactMatch">Match whole words only</string>
+    <string name="MessageFiltersExactMatchDesc">Avoid filtering text when a keyword appears only as part of a larger word.</string>
+    <string name="MessageFiltersRules">%1$d rules</string>
+    <string name="MessageFiltersAbout">Hide matching messages under a spoiler. Use one keyword or phrase per line.</string>
     <string name="HidePhone">Hide my phone number</string>
     <string name="DeleteAllFromSelf">Delete own messages</string>
     <string name="DeleteAllFromSelfAlert">Warning! This will **delete all messages from you** in this chat for **all** participants.</string>
     <string name="DeleteAllFromSelfAlertBefore">Warning! This will **delete all messages from you before %s** in this chat for **all** participants.</string>
     <string name="DeleteAllFromSelfBefore">Before...</string>
+    <string name="AccountOrderNeko">Accounts</string>
+    <string name="AccountOrderNekoDesc">Reorder active accounts</string>
+    <string name="AccountOrderHintNeko">Long press and drag an account to change the order used by account switchers.</string>
+    <string name="AccountLimitReachedNeko">You can add up to %1$d accounts.</string>
+    <string name="QuickSwitchFolderNekoHint">Long press the Chats tab to switch folders quickly.</string>
+    <string name="ShowActiveFolderTitle">Show active folder in header</string>
+    <string name="ShowActiveFolderTitleDesc">Replace the app name with the current folder name when a folder tab is selected.</string>
     <string name="IgnoreBlocked">Hide messages from blocked user</string>
     <string name="Connection">Connection</string>
     <string name="Chat">Chat</string>
@@ -325,7 +341,6 @@
     <string name="TabsPositionTop">Top</string>
     <string name="TabsPositionBottom">Bottom</string>
     <string name="StrokeOnViews">Glare effects</string>
-
     <!-- Accessibility -->
     <string name="AccessibilitySettings">Accessibility settings</string>
 </resources>

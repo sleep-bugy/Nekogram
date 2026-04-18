@@ -324,4 +324,20 @@
     <string name="StrokeOnViews">キラキラエフェクト</string>
     <!-- Accessibility -->
     <string name="AccessibilitySettings">ユーザー補助の設定</string>
+    <string name="MessageFiltersNeko">メッセージフィルター</string>
+    <string name="MessageFiltersEnabled">フィルターを有効にする</string>
+    <string name="MessageFiltersKeywords">キーワードとフレーズ</string>
+    <string name="MessageFiltersKeywordsHint">1行につき1つのキーワードまたはフレーズ</string>
+    <string name="MessageFiltersKeywordsEmpty">ルールなし</string>
+    <string name="MessageFiltersExactMatch">完全一致の単語のみ</string>
+    <string name="MessageFiltersExactMatchDesc">キーワードが長い単語の一部としてだけ現れる場合は、テキストをフィルターしないようにします。</string>
+    <string name="MessageFiltersRules">%1$d 件のルール</string>
+    <string name="MessageFiltersAbout">一致したメッセージをスポイラーの下に隠します。1行につき1つのキーワードまたはフレーズを使ってください。</string>
+    <string name="AccountOrderNeko">アカウント</string>
+    <string name="AccountOrderNekoDesc">アクティブなアカウントを並べ替え</string>
+    <string name="AccountOrderHintNeko">アカウント切替で使う順序を変更するには、アカウントを長押ししてドラッグしてください。</string>
+    <string name="AccountLimitReachedNeko">最大 %1$d 個のアカウントを追加できます。</string>
+    <string name="QuickSwitchFolderNekoHint">チャットタブを長押しするとフォルダーをすばやく切り替えられます。</string>
+    <string name="ShowActiveFolderTitle">ヘッダーに現在のフォルダーを表示</string>
+    <string name="ShowActiveFolderTitleDesc">フォルダータブを選択したときに、アプリ名を現在のフォルダー名に置き換えます。</string>
 </resources>

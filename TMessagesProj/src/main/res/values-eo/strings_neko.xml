@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Accessibility -->
+    <string name="MessageFiltersNeko">Mesaĝfiltriloj</string>
+    <string name="MessageFiltersEnabled">Ebligi filtrilojn</string>
+    <string name="MessageFiltersKeywords">Ŝlosilvortoj kaj frazoj</string>
+    <string name="MessageFiltersKeywordsHint">Unu ŝlosilvorto aŭ frazo por linio</string>
+    <string name="MessageFiltersKeywordsEmpty">Neniuj reguloj</string>
+    <string name="MessageFiltersExactMatch">Kongruigi nur tutajn vortojn</string>
+    <string name="MessageFiltersExactMatchDesc">Evitu filtri tekston kiam ŝlosilvorto aperas nur kiel parto de pli longa vorto.</string>
+    <string name="MessageFiltersRules">%1$d reguloj</string>
+    <string name="MessageFiltersAbout">Kaŝu kongruajn mesaĝojn sub spoiler. Uzu unu ŝlosilvorton aŭ frazon por linio.</string>
+    <string name="AccountOrderNeko">Kontoj</string>
+    <string name="AccountOrderNekoDesc">Reordigi aktivajn kontojn</string>
+    <string name="AccountOrderHintNeko">Premu longe kaj trenu konton por ŝanĝi la ordon uzatan de kontŝanĝiloj.</string>
+    <string name="AccountLimitReachedNeko">Vi povas aldoni ĝis %1$d kontojn.</string>
+    <string name="QuickSwitchFolderNekoHint">Premu longe la langeton Babilejoj por rapide ŝanĝi dosierujojn.</string>
+    <string name="ShowActiveFolderTitle">Montri aktivan dosierujon en la kaplinio</string>
+    <string name="ShowActiveFolderTitleDesc">Anstataŭigi la nomon de la aplikaĵo per la nomo de la nuna dosierujo kiam dosieruja langeto estas elektita.</string>
 </resources>

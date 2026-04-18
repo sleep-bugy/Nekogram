@@ -310,4 +310,20 @@
     <string name="HideChannelBottomButtons">Kanallarda aşağı butonları gizle</string>
     <string name="TranslationKeepFormatting">Çeviri sırasında orijinal metin biçimini koru</string>
     <!-- Accessibility -->
+    <string name="MessageFiltersNeko">Mesaj filtreleri</string>
+    <string name="MessageFiltersEnabled">Filtreleri etkinleştir</string>
+    <string name="MessageFiltersKeywords">Anahtar kelimeler ve ifadeler</string>
+    <string name="MessageFiltersKeywordsHint">Her satıra bir anahtar kelime veya ifade</string>
+    <string name="MessageFiltersKeywordsEmpty">Kural yok</string>
+    <string name="MessageFiltersExactMatch">Yalnızca tam kelimeleri eşleştir</string>
+    <string name="MessageFiltersExactMatchDesc">Bir anahtar kelime yalnızca daha uzun bir kelimenin parçası olarak görünüyorsa metni filtrelemekten kaçının.</string>
+    <string name="MessageFiltersRules">%1$d kural</string>
+    <string name="MessageFiltersAbout">Eşleşen mesajları spoiler altında gizleyin. Her satıra bir anahtar kelime veya ifade kullanın.</string>
+    <string name="AccountOrderNeko">Hesaplar</string>
+    <string name="AccountOrderNekoDesc">Etkin hesapları yeniden sırala</string>
+    <string name="AccountOrderHintNeko">Hesap değiştiricilerinin kullandığı sırayı değiştirmek için bir hesabı basılı tutup sürükleyin.</string>
+    <string name="AccountLimitReachedNeko">En fazla %1$d hesap ekleyebilirsiniz.</string>
+    <string name="QuickSwitchFolderNekoHint">Klasörler arasında hızlı geçiş yapmak için Sohbetler sekmesine uzun basın.</string>
+    <string name="ShowActiveFolderTitle">Başlıkta etkin klasörü göster</string>
+    <string name="ShowActiveFolderTitleDesc">Bir klasör sekmesi seçildiğinde uygulama adını geçerli klasör adıyla değiştir.</string>
 </resources>

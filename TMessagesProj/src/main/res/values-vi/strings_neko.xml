@@ -322,4 +322,20 @@
     <string name="StrokeOnViews">Hiệu ứng chói sáng</string>
     <!-- Accessibility -->
     <string name="AccessibilitySettings">Cài đặt trợ năng</string>
+    <string name="MessageFiltersNeko">Bộ lọc tin nhắn</string>
+    <string name="MessageFiltersEnabled">Bật bộ lọc</string>
+    <string name="MessageFiltersKeywords">Từ khóa và cụm từ</string>
+    <string name="MessageFiltersKeywordsHint">Mỗi dòng một từ khóa hoặc cụm từ</string>
+    <string name="MessageFiltersKeywordsEmpty">Không có quy tắc</string>
+    <string name="MessageFiltersExactMatch">Chỉ khớp toàn bộ từ</string>
+    <string name="MessageFiltersExactMatchDesc">Tránh lọc văn bản khi từ khóa chỉ xuất hiện như một phần của từ dài hơn.</string>
+    <string name="MessageFiltersRules">%1$d quy tắc</string>
+    <string name="MessageFiltersAbout">Ẩn các tin nhắn khớp dưới spoiler. Dùng một từ khóa hoặc cụm từ cho mỗi dòng.</string>
+    <string name="AccountOrderNeko">Tài khoản</string>
+    <string name="AccountOrderNekoDesc">Sắp xếp lại các tài khoản đang hoạt động</string>
+    <string name="AccountOrderHintNeko">Nhấn giữ và kéo một tài khoản để thay đổi thứ tự mà bộ chuyển đổi tài khoản sử dụng.</string>
+    <string name="AccountLimitReachedNeko">Bạn có thể thêm tối đa %1$d tài khoản.</string>
+    <string name="QuickSwitchFolderNekoHint">Nhấn giữ tab Trò chuyện để chuyển thư mục nhanh.</string>
+    <string name="ShowActiveFolderTitle">Hiển thị thư mục đang hoạt động trong tiêu đề</string>
+    <string name="ShowActiveFolderTitleDesc">Thay tên ứng dụng bằng tên thư mục hiện tại khi chọn tab thư mục.</string>
 </resources>

@@ -323,4 +323,20 @@
     <string name="StrokeOnViews">炫光效果</string>
     <!-- Accessibility -->
     <string name="AccessibilitySettings">無障礙設定</string>
+    <string name="MessageFiltersNeko">訊息篩選器</string>
+    <string name="MessageFiltersEnabled">啟用篩選器</string>
+    <string name="MessageFiltersKeywords">關鍵字與片語</string>
+    <string name="MessageFiltersKeywordsHint">每行一個關鍵字或片語</string>
+    <string name="MessageFiltersKeywordsEmpty">沒有規則</string>
+    <string name="MessageFiltersExactMatch">僅比對完整單字</string>
+    <string name="MessageFiltersExactMatchDesc">當關鍵字只是較長單字的一部分時，避免過濾文字。</string>
+    <string name="MessageFiltersRules">%1$d 條規則</string>
+    <string name="MessageFiltersAbout">將符合的訊息隱藏在劇透下。每行使用一個關鍵字或片語。</string>
+    <string name="AccountOrderNeko">帳號</string>
+    <string name="AccountOrderNekoDesc">重新排序已登入帳號</string>
+    <string name="AccountOrderHintNeko">長按並拖曳帳號，以變更帳號切換器使用的順序。</string>
+    <string name="AccountLimitReachedNeko">最多可新增 %1$d 個帳號。</string>
+    <string name="QuickSwitchFolderNekoHint">長按聊天分頁可快速切換資料夾。</string>
+    <string name="ShowActiveFolderTitle">在標題列顯示目前資料夾</string>
+    <string name="ShowActiveFolderTitleDesc">選取資料夾分頁時，以目前資料夾名稱取代應用程式名稱。</string>
 </resources>

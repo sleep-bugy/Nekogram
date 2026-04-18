@@ -313,4 +313,20 @@
     <string name="AutoInlineBotDesc">پرس‌وجوی خودکار ربات درون‌خطی بر اساس متن پیام.</string>
     <!-- Accessibility -->
     <string name="AccessibilitySettings">تنظیمات دسترسی پذیری</string>
+    <string name="MessageFiltersNeko">فیلترهای پیام</string>
+    <string name="MessageFiltersEnabled">فعال‌کردن فیلترها</string>
+    <string name="MessageFiltersKeywords">کلمات کلیدی و عبارت‌ها</string>
+    <string name="MessageFiltersKeywordsHint">در هر خط یک کلمه کلیدی یا عبارت</string>
+    <string name="MessageFiltersKeywordsEmpty">بدون قانون</string>
+    <string name="MessageFiltersExactMatch">فقط تطبیق واژه‌های کامل</string>
+    <string name="MessageFiltersExactMatchDesc">وقتی کلمه کلیدی فقط به‌عنوان بخشی از یک واژه بلندتر ظاهر می‌شود، از فیلتر کردن متن جلوگیری کنید.</string>
+    <string name="MessageFiltersRules">%1$d قانون</string>
+    <string name="MessageFiltersAbout">پیام‌های مطابق را زیر اسپویلر پنهان کن. در هر خط از یک کلمه کلیدی یا عبارت استفاده کن.</string>
+    <string name="AccountOrderNeko">حساب‌ها</string>
+    <string name="AccountOrderNekoDesc">مرتب‌سازی دوباره حساب‌های فعال</string>
+    <string name="AccountOrderHintNeko">برای تغییر ترتیبی که در جابه‌جاکننده‌های حساب استفاده می‌شود، یک حساب را نگه دارید و بکشید.</string>
+    <string name="AccountLimitReachedNeko">می‌توانید تا %1$d حساب اضافه کنید.</string>
+    <string name="QuickSwitchFolderNekoHint">برای جابه‌جایی سریع بین پوشه‌ها، زبانه چت‌ها را نگه دارید.</string>
+    <string name="ShowActiveFolderTitle">نمایش پوشه فعال در سربرگ</string>
+    <string name="ShowActiveFolderTitleDesc">وقتی یک زبانه پوشه انتخاب می‌شود، نام برنامه را با نام پوشه فعلی جایگزین کن.</string>
 </resources>

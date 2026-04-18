@@ -67,6 +67,8 @@ public class NekoConfig {
 
     public static boolean useSystemEmoji = false;
     public static boolean ignoreBlocked = false;
+    public static boolean enableMessageFilter = false;
+    public static boolean messageFilterExactMatch = false;
     public static boolean hideKeyboardOnChatScroll = false;
     public static boolean rearVideoMessages = false;
     public static boolean hideAllTab = false;
@@ -89,6 +91,7 @@ public class NekoConfig {
     public static int downloadSpeedBoost = BOOST_NONE;
     public static Set<String> restrictedLanguages;
     public static String externalTranslationProvider;
+    public static String messageFilterKeywords = "";
     public static int transcribeProvider = TRANSCRIBE_PREMIUM;
     public static String cfAccountID = "";
     public static String cfApiToken = "";
@@ -142,6 +145,7 @@ public class NekoConfig {
     public static boolean predictiveBackAnimation = false;
     public static boolean hideBottomNavigationBar = false;
     public static boolean bottomFilterTabs = false;
+    public static boolean showActiveFolderTitle = true;
     public static boolean strokeOnViews = true;
 
     public static boolean shouldNOTTrustMe = false;
@@ -171,6 +175,8 @@ public class NekoConfig {
             SharedPreferences preferences = ApplicationLoader.applicationContext.getSharedPreferences("nekoconfig", Activity.MODE_PRIVATE);
             preferIPv6 = preferences.getBoolean("preferIPv6", false);
             ignoreBlocked = preferences.getBoolean("ignoreBlocked2", false);
+            enableMessageFilter = preferences.getBoolean("enableMessageFilter", false);
+            messageFilterExactMatch = preferences.getBoolean("messageFilterExactMatch", false);
             tabletMode = preferences.getInt("tabletMode", TABLET_AUTO);
             nameOrder = preferences.getInt("nameOrder", 1);
             showAddToSavedMessages = preferences.getBoolean("showAddToSavedMessages", true);
@@ -232,6 +238,7 @@ public class NekoConfig {
             reducedColors = preferences.getBoolean("reducedColors", false);
             ignoreContentRestriction = preferences.getBoolean("ignoreContentRestriction", false);
             externalTranslationProvider = preferences.getString("externalTranslationProvider", "");
+            messageFilterKeywords = preferences.getString("messageFilterKeywords", "");
             TranslatorApps.loadTranslatorAppsAsync();
             showTimeHint = preferences.getBoolean("showTimeHint", false);
             transcribeProvider = preferences.getInt("transcribeProvider", TRANSCRIBE_PREMIUM);
@@ -246,6 +253,7 @@ public class NekoConfig {
             predictiveBackAnimation = preferences.getBoolean("predictiveBackAnimation", false);
             hideBottomNavigationBar = preferences.getBoolean("hideBottomNavigationBar", false);
             bottomFilterTabs = preferences.getBoolean("bottomFilterTabs", false);
+            showActiveFolderTitle = preferences.getBoolean("showActiveFolderTitle", true);
             strokeOnViews = preferences.getBoolean("strokeOnViews", true);
 
             LensHelper.checkLensSupportAsync();
@@ -402,6 +410,14 @@ public class NekoConfig {
         SharedPreferences preferences = ApplicationLoader.applicationContext.getSharedPreferences("nekoconfig", Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean("bottomFilterTabs", bottomFilterTabs);
+        editor.apply();
+    }
+
+    public static void toggleShowActiveFolderTitle() {
+        showActiveFolderTitle = !showActiveFolderTitle;
+        SharedPreferences preferences = ApplicationLoader.applicationContext.getSharedPreferences("nekoconfig", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean("showActiveFolderTitle", showActiveFolderTitle);
         editor.apply();
     }
 
@@ -642,6 +658,30 @@ public class NekoConfig {
         SharedPreferences preferences = ApplicationLoader.applicationContext.getSharedPreferences("nekoconfig", Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean("ignoreBlocked2", ignoreBlocked);
+        editor.apply();
+    }
+
+    public static void toggleEnableMessageFilter() {
+        enableMessageFilter = !enableMessageFilter;
+        SharedPreferences preferences = ApplicationLoader.applicationContext.getSharedPreferences("nekoconfig", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean("enableMessageFilter", enableMessageFilter);
+        editor.apply();
+    }
+
+    public static void toggleMessageFilterExactMatch() {
+        messageFilterExactMatch = !messageFilterExactMatch;
+        SharedPreferences preferences = ApplicationLoader.applicationContext.getSharedPreferences("nekoconfig", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean("messageFilterExactMatch", messageFilterExactMatch);
+        editor.apply();
+    }
+
+    public static void setMessageFilterKeywords(String keywords) {
+        messageFilterKeywords = keywords == null ? "" : keywords;
+        SharedPreferences preferences = ApplicationLoader.applicationContext.getSharedPreferences("nekoconfig", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("messageFilterKeywords", messageFilterKeywords);
         editor.apply();
     }
 

@@ -36,6 +36,7 @@ import org.telegram.ui.PasscodeActivity;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import tw.nekomimi.nekogram.helpers.AccountOrderHelper;
 import tw.nekomimi.nekogram.helpers.PasscodeHelper;
 
 public class NekoPasscodeSettingsActivity extends BaseNekoSettingsActivity {
@@ -60,6 +61,7 @@ public class NekoPasscodeSettingsActivity extends BaseNekoSettingsActivity {
                 accounts.add(a);
             }
         }
+        AccountOrderHelper.sortAccountNumbers(accounts);
         return super.onFragmentCreate();
     }
 

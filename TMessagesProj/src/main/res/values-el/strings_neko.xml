@@ -316,4 +316,20 @@
     <string name="HideBottomNavigationBar">Απόκρυψη κάτω μπάρας πλοήγησης</string>
     <!-- Accessibility -->
     <string name="AccessibilitySettings">Ρυθμίσεις προσβασιμότητας</string>
+    <string name="MessageFiltersNeko">Φίλτρα μηνυμάτων</string>
+    <string name="MessageFiltersEnabled">Ενεργοποίηση φίλτρων</string>
+    <string name="MessageFiltersKeywords">Λέξεις-κλειδιά και φράσεις</string>
+    <string name="MessageFiltersKeywordsHint">Μία λέξη-κλειδί ή φράση ανά γραμμή</string>
+    <string name="MessageFiltersKeywordsEmpty">Χωρίς κανόνες</string>
+    <string name="MessageFiltersExactMatch">Αντιστοίχιση μόνο ολόκληρων λέξεων</string>
+    <string name="MessageFiltersExactMatchDesc">Αποφύγετε το φιλτράρισμα κειμένου όταν μια λέξη-κλειδί εμφανίζεται μόνο ως μέρος μιας μεγαλύτερης λέξης.</string>
+    <string name="MessageFiltersRules">%1$d κανόνες</string>
+    <string name="MessageFiltersAbout">Κρύψτε τα μηνύματα που ταιριάζουν κάτω από spoiler. Χρησιμοποιήστε μία λέξη-κλειδί ή φράση ανά γραμμή.</string>
+    <string name="AccountOrderNeko">Λογαριασμοί</string>
+    <string name="AccountOrderNekoDesc">Αναδιάταξη ενεργών λογαριασμών</string>
+    <string name="AccountOrderHintNeko">Πατήστε παρατεταμένα και σύρετε έναν λογαριασμό για να αλλάξετε τη σειρά που χρησιμοποιούν οι εναλλάκτες λογαριασμών.</string>
+    <string name="AccountLimitReachedNeko">Μπορείτε να προσθέσετε έως και %1$d λογαριασμούς.</string>
+    <string name="QuickSwitchFolderNekoHint">Πατήστε παρατεταμένα την καρτέλα Συνομιλίες για γρήγορη εναλλαγή φακέλων.</string>
+    <string name="ShowActiveFolderTitle">Εμφάνιση ενεργού φακέλου στην κεφαλίδα</string>
+    <string name="ShowActiveFolderTitleDesc">Αντικατάσταση του ονόματος της εφαρμογής με το όνομα του τρέχοντος φακέλου όταν επιλέγεται καρτέλα φακέλου.</string>
 </resources>

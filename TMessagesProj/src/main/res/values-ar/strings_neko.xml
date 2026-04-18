@@ -318,4 +318,20 @@
     <string name="HideBottomNavigationBar">إخفاء شريط التنقل السفلي</string>
     <!-- Accessibility -->
     <string name="AccessibilitySettings">إعدادات إمكانية الوصول</string>
+    <string name="MessageFiltersNeko">مرشحات الرسائل</string>
+    <string name="MessageFiltersEnabled">تفعيل المرشحات</string>
+    <string name="MessageFiltersKeywords">الكلمات المفتاحية والعبارات</string>
+    <string name="MessageFiltersKeywordsHint">كلمة مفتاحية أو عبارة واحدة في كل سطر</string>
+    <string name="MessageFiltersKeywordsEmpty">لا توجد قواعد</string>
+    <string name="MessageFiltersExactMatch">مطابقة الكلمات الكاملة فقط</string>
+    <string name="MessageFiltersExactMatchDesc">تجنب تصفية النص عندما تظهر الكلمة المفتاحية فقط كجزء من كلمة أطول.</string>
+    <string name="MessageFiltersRules">%1$d قواعد</string>
+    <string name="MessageFiltersAbout">أخفِ الرسائل المطابقة تحت سبويلر. استخدم كلمة مفتاحية أو عبارة واحدة في كل سطر.</string>
+    <string name="AccountOrderNeko">الحسابات</string>
+    <string name="AccountOrderNekoDesc">إعادة ترتيب الحسابات النشطة</string>
+    <string name="AccountOrderHintNeko">اضغط مطولاً واسحب حساباً لتغيير الترتيب المستخدم في مبدلات الحسابات.</string>
+    <string name="AccountLimitReachedNeko">يمكنك إضافة ما يصل إلى %1$d حسابات.</string>
+    <string name="QuickSwitchFolderNekoHint">اضغط مطولاً على تبويب الدردشات للتبديل بين المجلدات بسرعة.</string>
+    <string name="ShowActiveFolderTitle">إظهار المجلد النشط في الترويسة</string>
+    <string name="ShowActiveFolderTitleDesc">استبدل اسم التطبيق باسم المجلد الحالي عند تحديد تبويب مجلد.</string>
 </resources>

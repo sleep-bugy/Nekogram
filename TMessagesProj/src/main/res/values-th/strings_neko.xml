@@ -314,4 +314,20 @@
     <string name="ForceFontWeightFallback">บังคับใช้ความหนาฟอนต์แบบสำรอง</string>
     <!-- Accessibility -->
     <string name="AccessibilitySettings">การตั้งค่าการเข้าถึง</string>
+    <string name="MessageFiltersNeko">ตัวกรองข้อความ</string>
+    <string name="MessageFiltersEnabled">เปิดใช้ตัวกรอง</string>
+    <string name="MessageFiltersKeywords">คีย์เวิร์ดและวลี</string>
+    <string name="MessageFiltersKeywordsHint">หนึ่งคีย์เวิร์ดหรือวลีต่อหนึ่งบรรทัด</string>
+    <string name="MessageFiltersKeywordsEmpty">ไม่มีกฎ</string>
+    <string name="MessageFiltersExactMatch">จับคู่เฉพาะคำเต็ม</string>
+    <string name="MessageFiltersExactMatchDesc">หลีกเลี่ยงการกรองข้อความเมื่อคีย์เวิร์ดปรากฏเป็นเพียงส่วนหนึ่งของคำที่ยาวกว่า</string>
+    <string name="MessageFiltersRules">%1$d กฎ</string>
+    <string name="MessageFiltersAbout">ซ่อนข้อความที่ตรงกันไว้ใต้สปอยเลอร์ ใช้หนึ่งคีย์เวิร์ดหรือวลีต่อหนึ่งบรรทัด</string>
+    <string name="AccountOrderNeko">บัญชี</string>
+    <string name="AccountOrderNekoDesc">จัดลำดับบัญชีที่ใช้งานใหม่</string>
+    <string name="AccountOrderHintNeko">กดค้างและลากบัญชีเพื่อเปลี่ยนลำดับที่ตัวสลับบัญชีใช้</string>
+    <string name="AccountLimitReachedNeko">คุณสามารถเพิ่มบัญชีได้สูงสุด %1$d บัญชี</string>
+    <string name="QuickSwitchFolderNekoHint">กดค้างที่แท็บแชทเพื่อสลับโฟลเดอร์อย่างรวดเร็ว</string>
+    <string name="ShowActiveFolderTitle">แสดงโฟลเดอร์ที่ใช้งานอยู่ในส่วนหัว</string>
+    <string name="ShowActiveFolderTitleDesc">แทนที่ชื่อแอปด้วยชื่อโฟลเดอร์ปัจจุบันเมื่อเลือกแท็บโฟลเดอร์</string>
 </resources>

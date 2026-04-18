@@ -257,4 +257,20 @@
     <string name="ExportAsJson">JSON के रूप में कॉपी करें</string>
     <!-- Accessibility -->
     <string name="AccessibilitySettings">एक्सेसिबिलिटी सेटिंग</string>
+    <string name="MessageFiltersNeko">संदेश फ़िल्टर</string>
+    <string name="MessageFiltersEnabled">फ़िल्टर सक्षम करें</string>
+    <string name="MessageFiltersKeywords">कुंजीशब्द और वाक्यांश</string>
+    <string name="MessageFiltersKeywordsHint">प्रति पंक्ति एक कुंजीशब्द या वाक्यांश</string>
+    <string name="MessageFiltersKeywordsEmpty">कोई नियम नहीं</string>
+    <string name="MessageFiltersExactMatch">केवल पूरे शब्द मिलाएँ</string>
+    <string name="MessageFiltersExactMatchDesc">जब कोई कुंजीशब्द केवल किसी बड़े शब्द के हिस्से के रूप में दिखाई दे, तो पाठ को फ़िल्टर करने से बचें।</string>
+    <string name="MessageFiltersRules">%1$d नियम</string>
+    <string name="MessageFiltersAbout">मिलते हुए संदेशों को स्पॉइलर के नीचे छिपाएँ। प्रति पंक्ति एक कुंजीशब्द या वाक्यांश का उपयोग करें।</string>
+    <string name="AccountOrderNeko">खाते</string>
+    <string name="AccountOrderNekoDesc">सक्रिय खातों का क्रम बदलें</string>
+    <string name="AccountOrderHintNeko">खाता स्विचर द्वारा उपयोग किए जाने वाले क्रम को बदलने के लिए किसी खाते को देर तक दबाकर खींचें।</string>
+    <string name="AccountLimitReachedNeko">आप अधिकतम %1$d खाते जोड़ सकते हैं।</string>
+    <string name="QuickSwitchFolderNekoHint">फ़ोल्डर जल्दी बदलने के लिए चैट टैब को देर तक दबाएँ।</string>
+    <string name="ShowActiveFolderTitle">शीर्षक में सक्रिय फ़ोल्डर दिखाएँ</string>
+    <string name="ShowActiveFolderTitleDesc">जब कोई फ़ोल्डर टैब चुना जाए, तो ऐप के नाम को वर्तमान फ़ोल्डर के नाम से बदलें।</string>
 </resources>

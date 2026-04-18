@@ -13,6 +13,7 @@ import org.telegram.ui.Components.RecyclerListView;
 import org.telegram.ui.Components.UItem;
 import org.telegram.ui.Components.UniversalAdapter;
 import org.telegram.ui.Components.UniversalRecyclerView;
+import org.telegram.ui.FiltersSetupActivity;
 import org.telegram.ui.LaunchActivity;
 
 import java.util.ArrayList;
@@ -35,6 +36,8 @@ public class NekoAppearanceSettingsActivity extends BaseNekoSettingsActivity imp
     private final int mediaPreviewRow = rowId++;
 
     private final int hideAllTabRow = rowId++;
+    private final int manageFoldersRow = rowId++;
+    private final int showActiveFolderTitleRow = rowId++;
     private final int tabsTitleTypeRow = rowId++;
     private final int tabsPositionRow = rowId++;
 
@@ -81,6 +84,8 @@ public class NekoAppearanceSettingsActivity extends BaseNekoSettingsActivity imp
         items.add(UItem.asShadow(null));
 
         items.add(UItem.asHeader(LocaleController.getString(R.string.Filters)));
+        items.add(TextSettingsCellFactory.of(manageFoldersRow, LocaleController.getString(R.string.SettingsFolders), LocaleController.getString(R.string.SettingsFoldersInfo)).slug("manageFolders"));
+        items.add(UItem.asCheck(showActiveFolderTitleRow, LocaleController.getString(R.string.ShowActiveFolderTitle), LocaleController.getString(R.string.ShowActiveFolderTitleDesc)).slug("showActiveFolderTitle").setChecked(NekoConfig.showActiveFolderTitle));
         items.add(UItem.asCheck(hideAllTabRow, LocaleController.getString(R.string.HideAllTab)).slug("hideAllTab").setChecked(NekoConfig.hideAllTab));
         items.add(TextSettingsCellFactory.of(tabsTitleTypeRow, LocaleController.getString(R.string.TabTitleType), switch (NekoConfig.tabsTitleType) {
             case NekoConfig.TITLE_TYPE_TEXT ->
@@ -90,7 +95,7 @@ public class NekoAppearanceSettingsActivity extends BaseNekoSettingsActivity imp
             default -> LocaleController.getString(R.string.TabTitleTypeMix);
         }).slug("tabsTitleType"));
         items.add(TextSettingsCellFactory.of(tabsPositionRow, LocaleController.getString(R.string.TabsPosition), LocaleController.getString(NekoConfig.bottomFilterTabs ? R.string.TabsPositionBottom : R.string.TabsPositionTop)).slug("tabsPosition"));
-        items.add(UItem.asShadow(null));
+        items.add(UItem.asShadow(LocaleController.getString(R.string.QuickSwitchFolderNekoHint)));
 
         items.add(UItem.asHeader(LocaleController.getString(R.string.LiteOptionsBlur2)));
         items.add(UItem.asCheck(strokeOnViewsRow, LocaleController.getString(R.string.StrokeOnViews)).setChecked(NekoConfig.strokeOnViews).slug("strokeOnViews"));
@@ -150,6 +155,14 @@ public class NekoAppearanceSettingsActivity extends BaseNekoSettingsActivity imp
                 ((TextCheckCell) view).setChecked(NekoConfig.formatTimeWithSeconds);
             }
             parentLayout.rebuildAllFragmentViews(false, false);
+        } else if (id == manageFoldersRow) {
+            presentFragment(new FiltersSetupActivity());
+        } else if (id == showActiveFolderTitleRow) {
+            NekoConfig.toggleShowActiveFolderTitle();
+            if (view instanceof TextCheckCell) {
+                ((TextCheckCell) view).setChecked(NekoConfig.showActiveFolderTitle);
+            }
+            getNotificationCenter().postNotificationName(NotificationCenter.dialogFiltersUpdated);
         } else if (id == hideAllTabRow) {
             NekoConfig.toggleHideAllTab();
             if (view instanceof TextCheckCell) {

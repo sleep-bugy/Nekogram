@@ -322,4 +322,20 @@
     <string name="StrokeOnViews">Ефекти відблисків</string>
     <!-- Accessibility -->
     <string name="AccessibilitySettings">Налаштування спеціальних можливостей</string>
+    <string name="MessageFiltersNeko">Фільтри повідомлень</string>
+    <string name="MessageFiltersEnabled">Увімкнути фільтри</string>
+    <string name="MessageFiltersKeywords">Ключові слова та фрази</string>
+    <string name="MessageFiltersKeywordsHint">По одному ключовому слову або фразі в рядку</string>
+    <string name="MessageFiltersKeywordsEmpty">Немає правил</string>
+    <string name="MessageFiltersExactMatch">Збіг лише цілих слів</string>
+    <string name="MessageFiltersExactMatchDesc">Уникайте фільтрації тексту, коли ключове слово з’являється лише як частина довшого слова.</string>
+    <string name="MessageFiltersRules">%1$d правил</string>
+    <string name="MessageFiltersAbout">Ховайте відповідні повідомлення під спойлером. Використовуйте по одному ключовому слову або фразі в рядку.</string>
+    <string name="AccountOrderNeko">Акаунти</string>
+    <string name="AccountOrderNekoDesc">Змінити порядок активних акаунтів</string>
+    <string name="AccountOrderHintNeko">Натисніть і утримуйте акаунт, а потім перетягніть його, щоб змінити порядок, який використовують перемикачі акаунтів.</string>
+    <string name="AccountLimitReachedNeko">Ви можете додати до %1$d акаунтів.</string>
+    <string name="QuickSwitchFolderNekoHint">Утримуйте вкладку чатів, щоб швидко перемикати папки.</string>
+    <string name="ShowActiveFolderTitle">Показувати активну папку в заголовку</string>
+    <string name="ShowActiveFolderTitleDesc">Замінювати назву застосунку назвою поточної папки, коли вибрано вкладку папки.</string>
 </resources>

@@ -313,4 +313,20 @@
     <string name="HideChannelBottomButtons">Ukryj dolne przyciski kanału</string>
     <!-- Accessibility -->
     <string name="AccessibilitySettings">Ustawienia ułatwień dostępu</string>
+    <string name="MessageFiltersNeko">Filtry wiadomości</string>
+    <string name="MessageFiltersEnabled">Włącz filtry</string>
+    <string name="MessageFiltersKeywords">Słowa kluczowe i frazy</string>
+    <string name="MessageFiltersKeywordsHint">Jedno słowo kluczowe lub fraza w wierszu</string>
+    <string name="MessageFiltersKeywordsEmpty">Brak reguł</string>
+    <string name="MessageFiltersExactMatch">Dopasowuj tylko całe słowa</string>
+    <string name="MessageFiltersExactMatchDesc">Unikaj filtrowania tekstu, gdy słowo kluczowe występuje tylko jako część dłuższego słowa.</string>
+    <string name="MessageFiltersRules">%1$d reguł</string>
+    <string name="MessageFiltersAbout">Ukryj pasujące wiadomości pod spoilerem. Używaj jednego słowa kluczowego lub frazy w wierszu.</string>
+    <string name="AccountOrderNeko">Konta</string>
+    <string name="AccountOrderNekoDesc">Zmień kolejność aktywnych kont</string>
+    <string name="AccountOrderHintNeko">Przytrzymaj i przeciągnij konto, aby zmienić kolejność używaną przez przełączniki kont.</string>
+    <string name="AccountLimitReachedNeko">Możesz dodać maksymalnie %1$d kont.</string>
+    <string name="QuickSwitchFolderNekoHint">Przytrzymaj kartę Czaty, aby szybko przełączać foldery.</string>
+    <string name="ShowActiveFolderTitle">Pokaż aktywny folder w nagłówku</string>
+    <string name="ShowActiveFolderTitleDesc">Zastąp nazwę aplikacji nazwą bieżącego folderu po wybraniu karty folderu.</string>
 </resources>

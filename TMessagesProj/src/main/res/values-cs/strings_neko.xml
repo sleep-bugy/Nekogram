@@ -173,4 +173,20 @@
     <string name="EditEnableMarkdown">Povolit značkování</string>
     <string name="EditDisableMarkdown">Zakázat značkování</string>
     <!-- Accessibility -->
+    <string name="MessageFiltersNeko">Filtry zpráv</string>
+    <string name="MessageFiltersEnabled">Povolit filtry</string>
+    <string name="MessageFiltersKeywords">Klíčová slova a fráze</string>
+    <string name="MessageFiltersKeywordsHint">Jedno klíčové slovo nebo fráze na řádek</string>
+    <string name="MessageFiltersKeywordsEmpty">Žádná pravidla</string>
+    <string name="MessageFiltersExactMatch">Porovnávat jen celá slova</string>
+    <string name="MessageFiltersExactMatchDesc">Vyhněte se filtrování textu, když se klíčové slovo objeví jen jako součást delšího slova.</string>
+    <string name="MessageFiltersRules">%1$d pravidel</string>
+    <string name="MessageFiltersAbout">Skrýt odpovídající zprávy pod spoiler. Použijte jedno klíčové slovo nebo frázi na řádek.</string>
+    <string name="AccountOrderNeko">Účty</string>
+    <string name="AccountOrderNekoDesc">Změnit pořadí aktivních účtů</string>
+    <string name="AccountOrderHintNeko">Dlouze stiskněte a přetáhněte účet, chcete-li změnit pořadí používané přepínači účtů.</string>
+    <string name="AccountLimitReachedNeko">Můžete přidat až %1$d účtů.</string>
+    <string name="QuickSwitchFolderNekoHint">Dlouhým stiskem karty Chaty rychle přepnete složky.</string>
+    <string name="ShowActiveFolderTitle">Zobrazit aktivní složku v záhlaví</string>
+    <string name="ShowActiveFolderTitleDesc">Při výběru karty složky nahradí název aplikace názvem aktuální složky.</string>
 </resources>

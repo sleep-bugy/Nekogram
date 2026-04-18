@@ -283,4 +283,20 @@
     <string name="IgnoreContentRestriction">Kontent cheklovlarini olib tashlash</string>
     <!-- Accessibility -->
     <string name="AccessibilitySettings">Maxsus imkoniyatlar sozlamalari</string>
+    <string name="MessageFiltersNeko">Xabar filtrlari</string>
+    <string name="MessageFiltersEnabled">Filtrlarni yoqish</string>
+    <string name="MessageFiltersKeywords">Kalit so‘zlar va iboralar</string>
+    <string name="MessageFiltersKeywordsHint">Har bir satrga bitta kalit so‘z yoki ibora</string>
+    <string name="MessageFiltersKeywordsEmpty">Qoidalar yo‘q</string>
+    <string name="MessageFiltersExactMatch">Faqat to‘liq so‘zlarni moslashtirish</string>
+    <string name="MessageFiltersExactMatchDesc">Kalit so‘z faqat uzunroq so‘zning bir qismi sifatida paydo bo‘lsa, matnni filtrlashdan saqlaning.</string>
+    <string name="MessageFiltersRules">%1$d ta qoida</string>
+    <string name="MessageFiltersAbout">Mos keladigan xabarlarni spoiler ostiga yashiring. Har bir satrga bitta kalit so‘z yoki ibora kiriting.</string>
+    <string name="AccountOrderNeko">Hisoblar</string>
+    <string name="AccountOrderNekoDesc">Faol hisoblarni qayta tartiblash</string>
+    <string name="AccountOrderHintNeko">Hisob almashtirgichlar ishlatadigan tartibni o‘zgartirish uchun hisobni bosib turib sudrang.</string>
+    <string name="AccountLimitReachedNeko">Siz %1$d tagacha hisob qo‘shishingiz mumkin.</string>
+    <string name="QuickSwitchFolderNekoHint">Papkalarni tez almashtirish uchun Chatlar yorlig‘ini bosib turing.</string>
+    <string name="ShowActiveFolderTitle">Sarlavhada faol papkani ko‘rsatish</string>
+    <string name="ShowActiveFolderTitleDesc">Papka yorlig‘i tanlanganda ilova nomini joriy papka nomi bilan almashtiring.</string>
 </resources>

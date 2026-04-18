@@ -319,4 +319,20 @@
     <string name="HideBottomNavigationBar">Ocultar barra de navegação inferior</string>
     <!-- Accessibility -->
     <string name="AccessibilitySettings">Opções de acessibilidade</string>
+    <string name="MessageFiltersNeko">Filtros de mensagens</string>
+    <string name="MessageFiltersEnabled">Ativar filtros</string>
+    <string name="MessageFiltersKeywords">Palavras-chave e frases</string>
+    <string name="MessageFiltersKeywordsHint">Uma palavra-chave ou frase por linha</string>
+    <string name="MessageFiltersKeywordsEmpty">Sem regras</string>
+    <string name="MessageFiltersExactMatch">Corresponder apenas a palavras inteiras</string>
+    <string name="MessageFiltersExactMatchDesc">Evite filtrar texto quando uma palavra-chave aparecer apenas como parte de uma palavra maior.</string>
+    <string name="MessageFiltersRules">%1$d regras</string>
+    <string name="MessageFiltersAbout">Oculte mensagens correspondentes sob um spoiler. Use uma palavra-chave ou frase por linha.</string>
+    <string name="AccountOrderNeko">Contas</string>
+    <string name="AccountOrderNekoDesc">Reordenar contas ativas</string>
+    <string name="AccountOrderHintNeko">Pressione e arraste uma conta para mudar a ordem usada pelos seletores de conta.</string>
+    <string name="AccountLimitReachedNeko">Você pode adicionar até %1$d contas.</string>
+    <string name="QuickSwitchFolderNekoHint">Mantenha pressionada a aba Conversas para alternar pastas rapidamente.</string>
+    <string name="ShowActiveFolderTitle">Mostrar pasta ativa no cabeçalho</string>
+    <string name="ShowActiveFolderTitleDesc">Substitua o nome do app pelo nome da pasta atual quando uma aba de pasta for selecionada.</string>
 </resources>

@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Accessibility -->
+    <string name="MessageFiltersNeko">Boodskapfilters</string>
+    <string name="MessageFiltersEnabled">Aktiveer filters</string>
+    <string name="MessageFiltersKeywords">Sleutelwoorde en frases</string>
+    <string name="MessageFiltersKeywordsHint">Een sleutelwoord of frase per reël</string>
+    <string name="MessageFiltersKeywordsEmpty">Geen reëls nie</string>
+    <string name="MessageFiltersExactMatch">Pas slegs hele woorde</string>
+    <string name="MessageFiltersExactMatchDesc">Vermy om teks te filtreer wanneer ’n sleutelwoord net as deel van ’n langer woord voorkom.</string>
+    <string name="MessageFiltersRules">%1$d reëls</string>
+    <string name="MessageFiltersAbout">Versteek ooreenstemmende boodskappe onder ’n spoiler. Gebruik een sleutelwoord of frase per reël.</string>
+    <string name="AccountOrderNeko">Rekeninge</string>
+    <string name="AccountOrderNekoDesc">Herrangskik aktiewe rekeninge</string>
+    <string name="AccountOrderHintNeko">Druk lank en sleep ’n rekening om die volgorde te verander wat deur rekeningwisselaars gebruik word.</string>
+    <string name="AccountLimitReachedNeko">Jy kan tot %1$d rekeninge byvoeg.</string>
+    <string name="QuickSwitchFolderNekoHint">Druk lank op die Kletse-oortjie om vinnig van vouer te wissel.</string>
+    <string name="ShowActiveFolderTitle">Wys aktiewe vouer in kop</string>
+    <string name="ShowActiveFolderTitleDesc">Vervang die programnaam met die huidige vouernaam wanneer ’n vouer-oortjie gekies is.</string>
 </resources>

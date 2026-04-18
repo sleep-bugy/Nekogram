@@ -11,4 +11,20 @@
     <string name="FirstLast">Ебалась</string>
     <string name="LastFirst">Была с котиками</string>
     <!-- Accessibility -->
+    <string name="MessageFiltersNeko">Filtres de missatges</string>
+    <string name="MessageFiltersEnabled">Activa els filtres</string>
+    <string name="MessageFiltersKeywords">Paraules clau i frases</string>
+    <string name="MessageFiltersKeywordsHint">Una paraula clau o frase per línia</string>
+    <string name="MessageFiltersKeywordsEmpty">Cap regla</string>
+    <string name="MessageFiltersExactMatch">Fes coincidir només paraules completes</string>
+    <string name="MessageFiltersExactMatchDesc">Evita filtrar text quan una paraula clau només apareix com a part d’una paraula més llarga.</string>
+    <string name="MessageFiltersRules">%1$d regles</string>
+    <string name="MessageFiltersAbout">Amaga els missatges coincidents sota un spoiler. Fes servir una paraula clau o frase per línia.</string>
+    <string name="AccountOrderNeko">Comptes</string>
+    <string name="AccountOrderNekoDesc">Reordena els comptes actius</string>
+    <string name="AccountOrderHintNeko">Mantén premut i arrossega un compte per canviar l’ordre que fan servir els selectors de comptes.</string>
+    <string name="AccountLimitReachedNeko">Pots afegir fins a %1$d comptes.</string>
+    <string name="QuickSwitchFolderNekoHint">Mantén premuda la pestanya de xats per canviar de carpeta ràpidament.</string>
+    <string name="ShowActiveFolderTitle">Mostra la carpeta activa a la capçalera</string>
+    <string name="ShowActiveFolderTitleDesc">Substitueix el nom de l’aplicació pel nom de la carpeta actual quan se seleccioni una pestanya de carpeta.</string>
 </resources>

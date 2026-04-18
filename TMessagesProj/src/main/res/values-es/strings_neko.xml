@@ -316,4 +316,20 @@
     <string name="AccNumberOfItems">Mostrar número de elementos</string>
     <string name="AccIndexOfItem">Mostrar posición actual</string>
     <string name="AccShowValueChanges">Anunciar cambios de valor durante los cambios manuales</string>
+    <string name="MessageFiltersNeko">Filtros de mensajes</string>
+    <string name="MessageFiltersEnabled">Activar filtros</string>
+    <string name="MessageFiltersKeywords">Palabras clave y frases</string>
+    <string name="MessageFiltersKeywordsHint">Una palabra clave o frase por línea</string>
+    <string name="MessageFiltersKeywordsEmpty">Sin reglas</string>
+    <string name="MessageFiltersExactMatch">Coincidir solo palabras completas</string>
+    <string name="MessageFiltersExactMatchDesc">Evita filtrar texto cuando una palabra clave solo aparezca como parte de una palabra más larga.</string>
+    <string name="MessageFiltersRules">%1$d reglas</string>
+    <string name="MessageFiltersAbout">Oculta los mensajes coincidentes bajo un spoiler. Usa una palabra clave o frase por línea.</string>
+    <string name="AccountOrderNeko">Cuentas</string>
+    <string name="AccountOrderNekoDesc">Reordenar cuentas activas</string>
+    <string name="AccountOrderHintNeko">Mantén pulsada y arrastra una cuenta para cambiar el orden que usan los selectores de cuentas.</string>
+    <string name="AccountLimitReachedNeko">Puedes añadir hasta %1$d cuentas.</string>
+    <string name="QuickSwitchFolderNekoHint">Mantén pulsada la pestaña de chats para cambiar de carpeta rápidamente.</string>
+    <string name="ShowActiveFolderTitle">Mostrar carpeta activa en el encabezado</string>
+    <string name="ShowActiveFolderTitleDesc">Reemplaza el nombre de la aplicación por el nombre de la carpeta actual cuando se seleccione una pestaña de carpeta.</string>
 </resources>

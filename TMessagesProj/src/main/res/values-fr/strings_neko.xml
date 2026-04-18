@@ -323,4 +323,20 @@
     <string name="StrokeOnViews">Effets de reflets</string>
     <!-- Accessibility -->
     <string name="AccessibilitySettings">Paramètres d\'accessibilité</string>
+    <string name="MessageFiltersNeko">Filtres de messages</string>
+    <string name="MessageFiltersEnabled">Activer les filtres</string>
+    <string name="MessageFiltersKeywords">Mots-clés et expressions</string>
+    <string name="MessageFiltersKeywordsHint">Un mot-clé ou une expression par ligne</string>
+    <string name="MessageFiltersKeywordsEmpty">Aucune règle</string>
+    <string name="MessageFiltersExactMatch">Correspondre uniquement aux mots entiers</string>
+    <string name="MessageFiltersExactMatchDesc">Évitez de filtrer le texte lorsqu’un mot-clé n’apparaît que comme partie d’un mot plus long.</string>
+    <string name="MessageFiltersRules">%1$d règles</string>
+    <string name="MessageFiltersAbout">Masquez les messages correspondants sous un spoiler. Utilisez un mot-clé ou une expression par ligne.</string>
+    <string name="AccountOrderNeko">Comptes</string>
+    <string name="AccountOrderNekoDesc">Réorganiser les comptes actifs</string>
+    <string name="AccountOrderHintNeko">Maintenez appuyé et faites glisser un compte pour modifier l’ordre utilisé par les sélecteurs de comptes.</string>
+    <string name="AccountLimitReachedNeko">Vous pouvez ajouter jusqu’à %1$d comptes.</string>
+    <string name="QuickSwitchFolderNekoHint">Maintenez l’onglet Discussions appuyé pour changer rapidement de dossier.</string>
+    <string name="ShowActiveFolderTitle">Afficher le dossier actif dans l’en-tête</string>
+    <string name="ShowActiveFolderTitleDesc">Remplace le nom de l’application par le nom du dossier actuel lorsqu’un onglet de dossier est sélectionné.</string>
 </resources>

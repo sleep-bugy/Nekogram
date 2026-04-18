@@ -39,6 +39,7 @@ import java.util.ArrayList;
 
 import tw.nekomimi.nekogram.NekoConfig;
 import tw.nekomimi.nekogram.helpers.EntitiesHelper;
+import tw.nekomimi.nekogram.helpers.MessageFilterHelper;
 import tw.nekomimi.nekogram.helpers.PopupHelper;
 import tw.nekomimi.nekogram.helpers.VoiceEnhancementsHelper;
 import tw.nekomimi.nekogram.helpers.WhisperHelper;
@@ -53,6 +54,7 @@ public class NekoChatSettingsActivity extends BaseNekoSettingsActivity implement
     private final int reducedColorsRow = rowId++;
 
     private final int ignoreBlockedRow = rowId++;
+    private final int messageFiltersRow = rowId++;
     private final int quickForwardRow = rowId++;
     private final int hideKeyboardOnChatScrollRow = rowId++;
     private final int tryToOpenAllLinksInIVRow = rowId++;
@@ -88,6 +90,14 @@ public class NekoChatSettingsActivity extends BaseNekoSettingsActivity implement
         NotificationCenter.getGlobalInstance().addObserver(this, NotificationCenter.emojiLoaded);
 
         return true;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (listView != null) {
+            listView.adapter.update(true);
+        }
     }
 
     @Override
@@ -137,6 +147,16 @@ public class NekoChatSettingsActivity extends BaseNekoSettingsActivity implement
         };
     }
 
+    private String getMessageFiltersValue() {
+        if (!NekoConfig.enableMessageFilter) {
+            return LocaleController.getString(R.string.Disable);
+        }
+        if (MessageFilterHelper.getFilterCount() == 0) {
+            return LocaleController.getString(R.string.MessageFiltersKeywordsEmpty);
+        }
+        return LocaleController.formatString(R.string.MessageFiltersRules, MessageFilterHelper.getFilterCount());
+    }
+
     @Override
     protected void fillItems(ArrayList<UItem> items, UniversalAdapter adapter) {
         items.add(StickerSizeCellFactory.of(stickerSizeRow, LocaleController.getString(R.string.StickerSize), NekoConfig.stickerSize, progress -> {
@@ -152,6 +172,7 @@ public class NekoChatSettingsActivity extends BaseNekoSettingsActivity implement
 
         items.add(UItem.asHeader(LocaleController.getString(R.string.Chat)));
         items.add(UItem.asCheck(ignoreBlockedRow, LocaleController.getString(R.string.IgnoreBlocked), LocaleController.getString(R.string.IgnoreBlockedAbout)).slug("ignoreBlocked").setChecked(NekoConfig.ignoreBlocked));
+        items.add(TextSettingsCellFactory.of(messageFiltersRow, LocaleController.getString(R.string.MessageFiltersNeko), getMessageFiltersValue()).slug("messageFilters"));
         items.add(UItem.asCheck(quickForwardRow, LocaleController.getString(R.string.QuickForward)).slug("quickForward").setChecked(NekoConfig.quickForward));
         items.add(UItem.asCheck(hideKeyboardOnChatScrollRow, LocaleController.getString(R.string.HideKeyboardOnChatScroll)).slug("hideKeyboardOnChatScroll").setChecked(NekoConfig.hideKeyboardOnChatScroll));
         items.add(UItem.asCheck(tryToOpenAllLinksInIVRow, LocaleController.getString(R.string.OpenAllLinksInInstantView)).slug("tryToOpenAllLinksInIV").setChecked(NekoConfig.tryToOpenAllLinksInIV));
@@ -220,6 +241,8 @@ public class NekoChatSettingsActivity extends BaseNekoSettingsActivity implement
             if (view instanceof TextCheckCell) {
                 ((TextCheckCell) view).setChecked(NekoConfig.ignoreBlocked);
             }
+        } else if (id == messageFiltersRow) {
+            presentFragment(new NekoMessageFilterSettingsActivity());
         } else if (id == hideKeyboardOnChatScrollRow) {
             NekoConfig.toggleHideKeyboardOnChatScroll();
             if (view instanceof TextCheckCell) {

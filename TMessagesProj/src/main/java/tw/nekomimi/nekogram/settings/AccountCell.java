@@ -30,6 +30,7 @@ public class AccountCell extends FrameLayout {
     private final TextView textView;
     private final BackupImageView imageView;
     private final ImageView checkImageView;
+    private final ImageView reorderImageView;
     private final AvatarDrawable avatarDrawable;
     private boolean needDivider;
 
@@ -61,6 +62,13 @@ public class AccountCell extends FrameLayout {
         checkImageView.setScaleType(ImageView.ScaleType.CENTER);
         checkImageView.setColorFilter(new PorterDuffColorFilter(Theme.getColor(Theme.key_switchTrackChecked, resourcesProvider), PorterDuff.Mode.MULTIPLY));
         addView(checkImageView, LayoutHelper.createFrame(40, LayoutHelper.MATCH_PARENT, Gravity.RIGHT | Gravity.TOP, 0, 0, 6, 0));
+
+        reorderImageView = new ImageView(context);
+        reorderImageView.setImageResource(R.drawable.list_reorder);
+        reorderImageView.setScaleType(ImageView.ScaleType.CENTER);
+        reorderImageView.setColorFilter(new PorterDuffColorFilter(Theme.getColor(Theme.key_windowBackgroundWhiteGrayIcon, resourcesProvider), PorterDuff.Mode.MULTIPLY));
+        reorderImageView.setVisibility(GONE);
+        addView(reorderImageView, LayoutHelper.createFrame(40, LayoutHelper.MATCH_PARENT, Gravity.RIGHT | Gravity.TOP, 0, 0, 6, 0));
     }
 
     @Override
@@ -76,6 +84,7 @@ public class AccountCell extends FrameLayout {
         imageView.setAlpha(enabled ? 1.0f : 0.5f);
         textView.setAlpha(enabled ? 1.0f : 0.5f);
         checkImageView.setAlpha(enabled ? 1.0f : 0.5f);
+        reorderImageView.setAlpha(enabled ? 1.0f : 0.5f);
     }
 
     @Override
@@ -84,13 +93,18 @@ public class AccountCell extends FrameLayout {
     }
 
     public void setAccount(int account, boolean check, boolean divider) {
+        setAccount(account, check, divider, false);
+    }
+
+    public void setAccount(int account, boolean check, boolean divider, boolean reorderable) {
         accountNumber = account;
         TLRPC.User user = UserConfig.getInstance(accountNumber).getCurrentUser();
         avatarDrawable.setInfo(user);
         textView.setText(Emoji.replaceEmoji(ContactsController.formatName(user.first_name, user.last_name), textView.getPaint().getFontMetricsInt(), false));
         imageView.getImageReceiver().setCurrentAccount(account);
         imageView.setForUserOrChat(user, avatarDrawable);
-        checkImageView.setVisibility(check ? VISIBLE : INVISIBLE);
+        checkImageView.setVisibility(reorderable ? GONE : (check ? VISIBLE : INVISIBLE));
+        reorderImageView.setVisibility(reorderable ? VISIBLE : GONE);
         needDivider = divider;
         setWillNotDraw(!divider);
     }

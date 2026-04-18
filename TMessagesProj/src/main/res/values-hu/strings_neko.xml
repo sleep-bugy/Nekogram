@@ -309,4 +309,20 @@
     <string name="CloudflareCredentialsDialog">Konfigurálja a Cloudflare fiók azonosítóját és API tokenjét.\n**Hogyan szerezhető be?**</string>
     <!-- Accessibility -->
     <string name="AccessibilitySettings">Kisegítő lehetőségek beállításai</string>
+    <string name="MessageFiltersNeko">Üzenetszűrők</string>
+    <string name="MessageFiltersEnabled">Szűrők engedélyezése</string>
+    <string name="MessageFiltersKeywords">Kulcsszavak és kifejezések</string>
+    <string name="MessageFiltersKeywordsHint">Soronként egy kulcsszó vagy kifejezés</string>
+    <string name="MessageFiltersKeywordsEmpty">Nincsenek szabályok</string>
+    <string name="MessageFiltersExactMatch">Csak teljes szavak egyezzenek</string>
+    <string name="MessageFiltersExactMatchDesc">Kerülje a szöveg szűrését, ha a kulcsszó csak egy hosszabb szó részeként jelenik meg.</string>
+    <string name="MessageFiltersRules">%1$d szabály</string>
+    <string name="MessageFiltersAbout">A megfelelő üzeneteket rejtse spoiler alá. Soronként egy kulcsszót vagy kifejezést használjon.</string>
+    <string name="AccountOrderNeko">Fiókok</string>
+    <string name="AccountOrderNekoDesc">Aktív fiókok átrendezése</string>
+    <string name="AccountOrderHintNeko">Tartson nyomva és húzzon egy fiókot a fiókváltók által használt sorrend megváltoztatásához.</string>
+    <string name="AccountLimitReachedNeko">Legfeljebb %1$d fiókot adhat hozzá.</string>
+    <string name="QuickSwitchFolderNekoHint">Tartsa nyomva a Csevegések fület a mappák gyors váltásához.</string>
+    <string name="ShowActiveFolderTitle">Aktív mappa megjelenítése a fejlécben</string>
+    <string name="ShowActiveFolderTitleDesc">A mappafül kiválasztásakor az alkalmazás nevét az aktuális mappa nevére cseréli.</string>
 </resources>

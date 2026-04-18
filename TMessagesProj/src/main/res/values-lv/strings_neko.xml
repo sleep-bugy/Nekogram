@@ -256,4 +256,20 @@
     <string name="ExportAsJson">Kopēt kā JSON</string>
     <!-- Accessibility -->
     <string name="AccessibilitySettings">Pieejamības iestatījumi</string>
+    <string name="MessageFiltersNeko">Ziņojumu filtri</string>
+    <string name="MessageFiltersEnabled">Iespējot filtrus</string>
+    <string name="MessageFiltersKeywords">Atslēgvārdi un frāzes</string>
+    <string name="MessageFiltersKeywordsHint">Viens atslēgvārds vai frāze katrā rindā</string>
+    <string name="MessageFiltersKeywordsEmpty">Nav noteikumu</string>
+    <string name="MessageFiltersExactMatch">Saskaņot tikai veselus vārdus</string>
+    <string name="MessageFiltersExactMatchDesc">Izvairieties filtrēt tekstu, ja atslēgvārds parādās tikai kā daļa no garāka vārda.</string>
+    <string name="MessageFiltersRules">%1$d noteikumi</string>
+    <string name="MessageFiltersAbout">Paslēpiet atbilstošos ziņojumus zem spoilera. Katrā rindā izmantojiet vienu atslēgvārdu vai frāzi.</string>
+    <string name="AccountOrderNeko">Konti</string>
+    <string name="AccountOrderNekoDesc">Pārkārtot aktīvos kontus</string>
+    <string name="AccountOrderHintNeko">Nospiediet un velciet kontu, lai mainītu secību, ko izmanto kontu pārslēdzēji.</string>
+    <string name="AccountLimitReachedNeko">Varat pievienot līdz %1$d kontiem.</string>
+    <string name="QuickSwitchFolderNekoHint">Ilgi nospiediet cilni Tērzēšanas, lai ātri pārslēgtu mapes.</string>
+    <string name="ShowActiveFolderTitle">Rādīt aktīvo mapi galvenē</string>
+    <string name="ShowActiveFolderTitleDesc">Aizstāt lietotnes nosaukumu ar pašreizējās mapes nosaukumu, kad ir atlasīta mapes cilne.</string>
 </resources>

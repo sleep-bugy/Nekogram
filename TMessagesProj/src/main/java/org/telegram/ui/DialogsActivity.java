@@ -3484,7 +3484,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
             } else {
                 statusDrawable = new AnimatedEmojiDrawable.SwapAnimatedEmojiDrawable(null, dp(26));
                 statusDrawable.center = true;
-                actionBar.setTitle(TypefaceHelper.getTitleText(), statusDrawable);
+                updateDialogsHeaderTitle(false);
                 updateStatus(UserConfig.getInstance(currentAccount).getCurrentUser(), false);
             }
             if (folderId == 0) {
@@ -3629,6 +3629,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                         checkListLoad(viewPages[0]);
                         viewPages[0].dialogsAdapter.resume();
                         viewPages[1].dialogsAdapter.pause();
+                        updateDialogsHeaderTitle(true);
                     }
                 }
 
@@ -5602,6 +5603,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
         rightSlidingDialogContainer.setOpenProgress(0f);
         contentView.addView(dialogStoriesCell, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, DialogStoriesCell.HEIGHT_IN_DP));
         contentView.addView(rightSlidingDialogContainer, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.MATCH_PARENT));
+        updateDialogsHeaderTitle(false);
 
         dialogsActivityStatusLayout = new DialogsActivityStatusLayout(context);
         // contentView.addView(dialogsActivityStatusLayout, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, Gravity.TOP));
@@ -6815,6 +6817,106 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
         viewPages[a].dialogsAdapter.setDialogsType(viewPages[a].dialogsType);
         viewPages[a].layoutManager.scrollToPositionWithOffset(viewPages[a].dialogsType == DIALOGS_TYPE_DEFAULT && hasHiddenArchive() && viewPages[a].archivePullViewState == ARCHIVE_ITEM_STATE_HIDDEN ? 1 : 0, (int) scrollYOffset);
         checkListLoad(viewPages[a]);
+        if (!animated) {
+            updateDialogsHeaderTitle(false);
+        }
+    }
+
+    private CharSequence getDialogsHeaderFolderTitle(FilterTabsView.Tab tab) {
+        CharSequence title = tab.realTitle != null ? tab.realTitle : tab.title;
+        if (TextUtils.isEmpty(title)) {
+            title = LocaleController.getString(tab.isDefault ? R.string.FilterAllChats : R.string.Folder);
+        }
+        return title;
+    }
+
+    private CharSequence getQuickFolderSwitchTitle(FilterTabsView.Tab tab) {
+        CharSequence title = getDialogsHeaderFolderTitle(tab);
+        if (!TextUtils.isEmpty(tab.emoticon)) {
+            return TextUtils.concat(tab.emoticon, " ", title);
+        }
+        return title;
+    }
+
+    private CharSequence getCurrentDialogsHeaderTitle() {
+        if (!NekoConfig.showActiveFolderTitle || actionBar == null || initialDialogsType != DIALOGS_TYPE_DEFAULT || folderId != 0 || !TextUtils.isEmpty(searchString) || filterTabsView == null || filterTabsView.getTabsCount() <= 1) {
+            return null;
+        }
+        int currentTabId = filterTabsView.getCurrentTabId();
+        if (currentTabId == filterTabsView.getDefaultTabId()) {
+            return null;
+        }
+        for (int i = 0; i < filterTabsView.getTabsCount(); i++) {
+            FilterTabsView.Tab tab = filterTabsView.getTab(i);
+            if (tab != null && tab.id == currentTabId && !tab.isDefault) {
+                return getDialogsHeaderFolderTitle(tab);
+            }
+        }
+        return null;
+    }
+
+    private void updateDialogsHeaderTitle(boolean animated) {
+        CharSequence customHeaderTitle = getCurrentDialogsHeaderTitle();
+        if (folderId == 0 && TextUtils.isEmpty(searchString) && actionBar != null) {
+            if (customHeaderTitle != null) {
+                actionBar.setTitle(customHeaderTitle, statusDrawable);
+            } else {
+                actionBar.setTitle(TypefaceHelper.getTitleText(), statusDrawable);
+            }
+        }
+        if (dialogStoriesCell != null) {
+            dialogStoriesCell.setCustomHeaderTitle(customHeaderTitle, animated);
+        }
+    }
+
+    public boolean showQuickFolderSwitch(View anchor, Runnable onOpenRecentChats) {
+        if (anchor == null || actionBar == null || initialDialogsType != DIALOGS_TYPE_DEFAULT || filterTabsView == null || filterTabsView.getVisibility() != View.VISIBLE || filterTabsView.getTabsCount() <= 1) {
+            return false;
+        }
+        if (actionBar.isActionModeShowed() || storiesOverscroll != 0 || startedTracking || tabsAnimationInProgress || filterTabsView.isAnimatingIndicator()) {
+            return false;
+        }
+        if (filterOptions != null) {
+            filterOptions.dismiss();
+            filterOptions = null;
+        }
+
+        final int currentTabId = filterTabsView.getCurrentTabId();
+        filterOptions = ItemOptions.makeOptions(DialogsActivity.this, anchor)
+                .setBlur(true)
+                .setGravity(Gravity.LEFT)
+                .translate(dp(-12), dp(-4));
+
+        for (int i = 0; i < filterTabsView.getTabsCount(); i++) {
+            final int position = i;
+            final FilterTabsView.Tab tab = filterTabsView.getTab(i);
+            if (tab == null) {
+                continue;
+            }
+            filterOptions.addChecked(currentTabId == tab.id, getQuickFolderSwitchTitle(tab), () -> {
+                if (tab.isLocked) {
+                    showDialog(new LimitReachedBottomSheet(DialogsActivity.this, anchor.getContext(), LimitReachedBottomSheet.TYPE_FOLDERS, currentAccount, null));
+                    return;
+                }
+                if (tab.id == filterTabsView.getCurrentTabId()) {
+                    scrollToTop(true, false);
+                    return;
+                }
+                filterTabsView.scrollToTab(tab, position);
+            });
+        }
+
+        filterOptions.addGap();
+        filterOptions.add(R.drawable.msg2_folder, LocaleController.getString(R.string.SettingsFolders), () -> presentFragment(new FiltersSetupActivity()));
+
+        if (onOpenRecentChats != null) {
+            filterOptions.add(R.drawable.msg_viewchats, LocaleController.getString(R.string.RecentChats), onOpenRecentChats);
+        }
+
+        filterOptions
+                .setDimAlpha(0x60)
+                .show();
+        return true;
     }
 
     private boolean scrollBarVisible = true;
@@ -6962,6 +7064,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                 }
             }
         }
+        updateDialogsHeaderTitle(animated);
     }
 
     @Override

@@ -196,4 +196,20 @@
     <string name="TranslatorShowOriginal">Med originaltext</string>
     <!-- Accessibility -->
     <string name="AccessibilitySettings">Tillgänglighetsinställningar</string>
+    <string name="MessageFiltersNeko">Meddelandefilter</string>
+    <string name="MessageFiltersEnabled">Aktivera filter</string>
+    <string name="MessageFiltersKeywords">Nyckelord och fraser</string>
+    <string name="MessageFiltersKeywordsHint">Ett nyckelord eller en fras per rad</string>
+    <string name="MessageFiltersKeywordsEmpty">Inga regler</string>
+    <string name="MessageFiltersExactMatch">Matcha endast hela ord</string>
+    <string name="MessageFiltersExactMatchDesc">Undvik att filtrera text när ett nyckelord bara förekommer som en del av ett längre ord.</string>
+    <string name="MessageFiltersRules">%1$d regler</string>
+    <string name="MessageFiltersAbout">Dölj matchande meddelanden under en spoiler. Använd ett nyckelord eller en fras per rad.</string>
+    <string name="AccountOrderNeko">Konton</string>
+    <string name="AccountOrderNekoDesc">Ordna om aktiva konton</string>
+    <string name="AccountOrderHintNeko">Tryck och håll ned och dra ett konto för att ändra ordningen som används av kontoväxlare.</string>
+    <string name="AccountLimitReachedNeko">Du kan lägga till upp till %1$d konton.</string>
+    <string name="QuickSwitchFolderNekoHint">Tryck och håll ned fliken Chattar för att snabbt byta mapp.</string>
+    <string name="ShowActiveFolderTitle">Visa aktiv mapp i rubriken</string>
+    <string name="ShowActiveFolderTitleDesc">Ersätt appnamnet med namnet på den aktuella mappen när en mappflik är vald.</string>
 </resources>

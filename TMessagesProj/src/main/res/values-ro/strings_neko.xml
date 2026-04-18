@@ -315,4 +315,20 @@
     <string name="ForceFontWeightFallback">Forțați opțiunile de rezervă pentru grosimea fontului</string>
     <!-- Accessibility -->
     <string name="AccessibilitySettings">Setări de accesibilitate</string>
+    <string name="MessageFiltersNeko">Filtre de mesaje</string>
+    <string name="MessageFiltersEnabled">Activează filtrele</string>
+    <string name="MessageFiltersKeywords">Cuvinte-cheie și expresii</string>
+    <string name="MessageFiltersKeywordsHint">Un cuvânt-cheie sau o expresie pe linie</string>
+    <string name="MessageFiltersKeywordsEmpty">Fără reguli</string>
+    <string name="MessageFiltersExactMatch">Potrivește doar cuvinte întregi</string>
+    <string name="MessageFiltersExactMatchDesc">Evitați filtrarea textului atunci când un cuvânt-cheie apare doar ca parte a unui cuvânt mai lung.</string>
+    <string name="MessageFiltersRules">%1$d reguli</string>
+    <string name="MessageFiltersAbout">Ascunde mesajele potrivite sub un spoiler. Folosește un cuvânt-cheie sau o expresie pe linie.</string>
+    <string name="AccountOrderNeko">Conturi</string>
+    <string name="AccountOrderNekoDesc">Reordonează conturile active</string>
+    <string name="AccountOrderHintNeko">Ține apăsat și trage un cont pentru a schimba ordinea folosită de comutatoarele de cont.</string>
+    <string name="AccountLimitReachedNeko">Poți adăuga până la %1$d conturi.</string>
+    <string name="QuickSwitchFolderNekoHint">Ține apăsată fila Conversații pentru a schimba rapid dosarele.</string>
+    <string name="ShowActiveFolderTitle">Arată dosarul activ în antet</string>
+    <string name="ShowActiveFolderTitleDesc">Înlocuiește numele aplicației cu numele dosarului curent când este selectată o filă de dosar.</string>
 </resources>

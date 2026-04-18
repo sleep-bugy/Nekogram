@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Accessibility -->
+    <string name="MessageFiltersNeko">מסנני הודעות</string>
+    <string name="MessageFiltersEnabled">הפעל מסננים</string>
+    <string name="MessageFiltersKeywords">מילות מפתח וביטויים</string>
+    <string name="MessageFiltersKeywordsHint">מילת מפתח או ביטוי אחד בכל שורה</string>
+    <string name="MessageFiltersKeywordsEmpty">אין כללים</string>
+    <string name="MessageFiltersExactMatch">התאמה למילים שלמות בלבד</string>
+    <string name="MessageFiltersExactMatchDesc">הימנע מסינון טקסט כאשר מילת מפתח מופיעה רק כחלק ממילה ארוכה יותר.</string>
+    <string name="MessageFiltersRules">%1$d כללים</string>
+    <string name="MessageFiltersAbout">הסתר הודעות תואמות תחת ספוילר. השתמש במילת מפתח או ביטוי אחד בכל שורה.</string>
+    <string name="AccountOrderNeko">חשבונות</string>
+    <string name="AccountOrderNekoDesc">סדר מחדש חשבונות פעילים</string>
+    <string name="AccountOrderHintNeko">לחץ לחיצה ארוכה וגרור חשבון כדי לשנות את הסדר שבו משתמשים מחליפי החשבונות.</string>
+    <string name="AccountLimitReachedNeko">ניתן להוסיף עד %1$d חשבונות.</string>
+    <string name="QuickSwitchFolderNekoHint">לחץ לחיצה ארוכה על לשונית הצ׳אטים כדי לעבור בין תיקיות במהירות.</string>
+    <string name="ShowActiveFolderTitle">הצג את התיקייה הפעילה בכותרת</string>
+    <string name="ShowActiveFolderTitleDesc">החלף את שם האפליקציה בשם התיקייה הנוכחית כאשר נבחרת לשונית תיקייה.</string>
 </resources>

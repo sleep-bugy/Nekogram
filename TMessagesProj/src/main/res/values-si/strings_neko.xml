@@ -59,4 +59,20 @@
     <string name="DisableAppBarShadow">මාතෘකා තීරු සෙවනැල්ල අක්‍රීය කරන්න</string>
     <string name="IdTypeHidden">හංගන්න</string>
     <!-- Accessibility -->
+    <string name="MessageFiltersNeko">පණිවිඩ පෙරහන්</string>
+    <string name="MessageFiltersEnabled">පෙරහන් සක්‍රිය කරන්න</string>
+    <string name="MessageFiltersKeywords">ප්‍රධාන පද සහ වාක්‍ය ඛණ්ඩ</string>
+    <string name="MessageFiltersKeywordsHint">එක් පේළියකට එක් ප්‍රධාන පදයක් හෝ වාක්‍ය ඛණ්ඩයක්</string>
+    <string name="MessageFiltersKeywordsEmpty">නීති නොමැත</string>
+    <string name="MessageFiltersExactMatch">පූර්ණ වචන පමණක් ගැළපෙන්න</string>
+    <string name="MessageFiltersExactMatchDesc">ප්‍රධාන පදයක් දිගු වචනයක කොටසක් ලෙස පමණක් දිස්වෙන විට පෙළ පෙරහන් කිරීමෙන් වළකින්න.</string>
+    <string name="MessageFiltersRules">නීති %1$dක්</string>
+    <string name="MessageFiltersAbout">ගැළපෙන පණිවිඩ spoiler යටතේ සඟවන්න. එක් පේළියකට එක් ප්‍රධාන පදයක් හෝ වාක්‍ය ඛණ්ඩයක් භාවිතා කරන්න.</string>
+    <string name="AccountOrderNeko">ගිණුම්</string>
+    <string name="AccountOrderNekoDesc">සක්‍රිය ගිණුම් නැවත සකසන්න</string>
+    <string name="AccountOrderHintNeko">ගිණුම් මාරුකාරක භාවිතා කරන අනුපිළිවෙල වෙනස් කිරීමට ගිණුමක් දිගටම ඔබා ඇදගෙන යන්න.</string>
+    <string name="AccountLimitReachedNeko">ඔබට %1$dක් දක්වා ගිණුම් එක් කළ හැක.</string>
+    <string name="QuickSwitchFolderNekoHint">ෆෝල්ඩර ඉක්මනින් මාරු කිරීමට චැට් ටැබ් එක දිගටම ඔබන්න.</string>
+    <string name="ShowActiveFolderTitle">ශීර්ෂයේ සක්‍රිය ෆෝල්ඩරය පෙන්වන්න</string>
+    <string name="ShowActiveFolderTitleDesc">ෆෝල්ඩර ටැබ් එකක් තෝරාගත් විට යෙදුමේ නම වත්මන් ෆෝල්ඩරයේ නමෙන් මාරු කරන්න.</string>
 </resources>

@@ -316,4 +316,20 @@
     <string name="HideBottomNavigationBar">Сакриј доњу траку за навигацију</string>
     <!-- Accessibility -->
     <string name="AccessibilitySettings">Подешавања приступачности</string>
+    <string name="MessageFiltersNeko">Филтери порука</string>
+    <string name="MessageFiltersEnabled">Омогући филтере</string>
+    <string name="MessageFiltersKeywords">Кључне речи и фразе</string>
+    <string name="MessageFiltersKeywordsHint">Једна кључна реч или фраза по реду</string>
+    <string name="MessageFiltersKeywordsEmpty">Нема правила</string>
+    <string name="MessageFiltersExactMatch">Поклапај само целе речи</string>
+    <string name="MessageFiltersExactMatchDesc">Избегавај филтрирање текста када се кључна реч појављује само као део дуже речи.</string>
+    <string name="MessageFiltersRules">%1$d правила</string>
+    <string name="MessageFiltersAbout">Сакриј одговарајуће поруке под спојлером. Користи једну кључну реч или фразу по реду.</string>
+    <string name="AccountOrderNeko">Налози</string>
+    <string name="AccountOrderNekoDesc">Промени редослед активних налога</string>
+    <string name="AccountOrderHintNeko">Притисни и задржи налог, па га превуци да промениш редослед који користе пребацивачи налога.</string>
+    <string name="AccountLimitReachedNeko">Можеш додати до %1$d налога.</string>
+    <string name="QuickSwitchFolderNekoHint">Задржи картицу Ћаскања да брзо пребацујеш фасцикле.</string>
+    <string name="ShowActiveFolderTitle">Прикажи активну фасциклу у заглављу</string>
+    <string name="ShowActiveFolderTitleDesc">Замени назив апликације називом тренутне фасцикле када је изабрана картица фасцикле.</string>
 </resources>

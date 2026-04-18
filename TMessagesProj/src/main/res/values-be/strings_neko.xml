@@ -314,4 +314,20 @@
     <string name="HideChannelBottomButtons">Схаваць ніжнія кнопкі ў канале</string>
     <!-- Accessibility -->
     <string name="AccessibilitySettings">Адмысловыя магчымасці</string>
+    <string name="MessageFiltersNeko">Фільтры паведамленняў</string>
+    <string name="MessageFiltersEnabled">Уключыць фільтры</string>
+    <string name="MessageFiltersKeywords">Ключавыя словы і фразы</string>
+    <string name="MessageFiltersKeywordsHint">Па адным ключавым слове або фразе ў радку</string>
+    <string name="MessageFiltersKeywordsEmpty">Няма правілаў</string>
+    <string name="MessageFiltersExactMatch">Супастаўляць толькі цэлыя словы</string>
+    <string name="MessageFiltersExactMatchDesc">Пазбягайце фільтрацыі тэксту, калі ключавое слова сустракаецца толькі як частка больш доўгага слова.</string>
+    <string name="MessageFiltersRules">%1$d правіл</string>
+    <string name="MessageFiltersAbout">Хавайце адпаведныя паведамленні пад спойлер. Выкарыстоўвайце па адным ключавым слове або фразе ў радку.</string>
+    <string name="AccountOrderNeko">Акаўнты</string>
+    <string name="AccountOrderNekoDesc">Змяніць парадак актыўных акаўнтаў</string>
+    <string name="AccountOrderHintNeko">Націсніце і ўтрымлівайце, затым перацягніце акаўнт, каб змяніць парадак у пераключальніках акаўнтаў.</string>
+    <string name="AccountLimitReachedNeko">Вы можаце дадаць да %1$d акаўнтаў.</string>
+    <string name="QuickSwitchFolderNekoHint">Націсніце і ўтрымлівайце ўкладку чатаў, каб хутка пераключаць тэчкі.</string>
+    <string name="ShowActiveFolderTitle">Паказваць актыўную тэчку ў загалоўку</string>
+    <string name="ShowActiveFolderTitleDesc">Замяняць назву праграмы назвай бягучай тэчкі, калі выбрана ўкладка тэчкі.</string>
 </resources>

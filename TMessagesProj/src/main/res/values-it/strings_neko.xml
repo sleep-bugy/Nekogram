@@ -310,4 +310,20 @@
     <string name="PreferOriginalQualityDesc">Visualizza i video nella qualità originale.</string>
     <!-- Accessibility -->
     <string name="AccessibilitySettings">Impostazioni di accessibilità</string>
+    <string name="MessageFiltersNeko">Filtri dei messaggi</string>
+    <string name="MessageFiltersEnabled">Abilita filtri</string>
+    <string name="MessageFiltersKeywords">Parole chiave e frasi</string>
+    <string name="MessageFiltersKeywordsHint">Una parola chiave o frase per riga</string>
+    <string name="MessageFiltersKeywordsEmpty">Nessuna regola</string>
+    <string name="MessageFiltersExactMatch">Corrispondi solo a parole intere</string>
+    <string name="MessageFiltersExactMatchDesc">Evita di filtrare il testo quando una parola chiave appare solo come parte di una parola più lunga.</string>
+    <string name="MessageFiltersRules">%1$d regole</string>
+    <string name="MessageFiltersAbout">Nascondi i messaggi corrispondenti sotto uno spoiler. Usa una parola chiave o frase per riga.</string>
+    <string name="AccountOrderNeko">Account</string>
+    <string name="AccountOrderNekoDesc">Riordina gli account attivi</string>
+    <string name="AccountOrderHintNeko">Tieni premuto e trascina un account per cambiare l’ordine usato dai selettori di account.</string>
+    <string name="AccountLimitReachedNeko">Puoi aggiungere fino a %1$d account.</string>
+    <string name="QuickSwitchFolderNekoHint">Tieni premuta la scheda Chat per cambiare cartella rapidamente.</string>
+    <string name="ShowActiveFolderTitle">Mostra la cartella attiva nell’intestazione</string>
+    <string name="ShowActiveFolderTitleDesc">Sostituisci il nome dell’app con il nome della cartella corrente quando viene selezionata una scheda cartella.</string>
 </resources>

@@ -207,4 +207,20 @@
     <string name="AccNumberOfItems">Vis antal elementer</string>
     <string name="AccIndexOfItem">Vis aktuel position</string>
     <string name="AccShowValueChanges">Annoncere værdiændringer under manuelle ændringer</string>
+    <string name="MessageFiltersNeko">Beskedfiltre</string>
+    <string name="MessageFiltersEnabled">Aktivér filtre</string>
+    <string name="MessageFiltersKeywords">Nøgleord og sætninger</string>
+    <string name="MessageFiltersKeywordsHint">Ét nøgleord eller én sætning pr. linje</string>
+    <string name="MessageFiltersKeywordsEmpty">Ingen regler</string>
+    <string name="MessageFiltersExactMatch">Match kun hele ord</string>
+    <string name="MessageFiltersExactMatchDesc">Undgå at filtrere tekst, når et nøgleord kun vises som en del af et længere ord.</string>
+    <string name="MessageFiltersRules">%1$d regler</string>
+    <string name="MessageFiltersAbout">Skjul matchende beskeder under en spoiler. Brug ét nøgleord eller én sætning pr. linje.</string>
+    <string name="AccountOrderNeko">Konti</string>
+    <string name="AccountOrderNekoDesc">Omarranger aktive konti</string>
+    <string name="AccountOrderHintNeko">Tryk og hold, og træk en konto for at ændre den rækkefølge, som kontoskiftere bruger.</string>
+    <string name="AccountLimitReachedNeko">Du kan tilføje op til %1$d konti.</string>
+    <string name="QuickSwitchFolderNekoHint">Tryk og hold på fanen Samtaler for hurtigt at skifte mappe.</string>
+    <string name="ShowActiveFolderTitle">Vis aktiv mappe i overskriften</string>
+    <string name="ShowActiveFolderTitleDesc">Erstat appnavnet med navnet på den aktuelle mappe, når en mappefane vælges.</string>
 </resources>
