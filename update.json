@@ -1,10 +1,10 @@
 {
-  "version": "12.6.5",
-  "version_code": 6667,
-  "url": "https://github.com/sleep-bugy/Nekogram/releases/download/v12.6.5-6667/Nekogram-12.6.5-6667-arm64-v8a.apk",
-  "file_name": "Nekogram-12.6.5-6667-arm64-v8a.apk",
-  "size": 65947930,
-  "sha256": "7c924d68d62fe6d962be1ef27450de1f3055c083a442728f01bca52308901594",
+  "version": "12.6.6",
+  "version_code": 6668,
+  "url": "https://github.com/sleep-bugy/Nekogram/releases/download/v12.6.6-6668/Nekogram-12.6.6-6668-arm64-v8a.apk",
+  "file_name": "Nekogram-12.6.6-6668-arm64-v8a.apk",
+  "size": 65947923,
+  "sha256": "3bdffee82ad8fa2ed074a513e639a1445f060940aef402cc5226436e051f4691",
   "can_not_skip": false,
-  "changelog": "Changelog:\n- Sleep timer for audio player\n- Sort folders by unread\n- Fade filtered messages (transparent message filters)\n- Add comma after mention\n- Disable unarchive swipe\n- Hide side share button\n- Hide photo counter"
+  "changelog": "Changelog:\n- Fix native tgnet callback crash while streaming or downloading music\n- Fix native timer use-after-free crash in the network event loop\n- Fix music stops or crashes when app goes to background\n- Fix \"Check for Update\" button unresponsive after first use\n- Fix auto-install APK after download completes"
 }

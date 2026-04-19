@@ -368,7 +368,9 @@ void *ConnectionsManager::ThreadProc(void *data) {
     if (LOGS_ENABLED) DEBUG_D("network thread started");
     auto networkManager = (ConnectionsManager *) (data);
 #ifdef ANDROID
-    javaVm->AttachCurrentThread(&jniEnv[networkManager->instanceNum], nullptr);
+    JNIEnv *env = nullptr;
+    javaVm->AttachCurrentThread(&env, nullptr);
+    jniEnv[networkManager->instanceNum] = env;
 #endif
     if (networkManager->currentUserId != 0 && networkManager->pushConnectionEnabled) {
         Datacenter *datacenter = networkManager->getDatacenterWithId(networkManager->currentDatacenterId);
@@ -380,6 +382,10 @@ void *ConnectionsManager::ThreadProc(void *data) {
     do {
         networkManager->select();
     } while (!done);
+#ifdef ANDROID
+    jniEnv[networkManager->instanceNum] = nullptr;
+    javaVm->DetachCurrentThread();
+#endif
     return nullptr;
 }
 

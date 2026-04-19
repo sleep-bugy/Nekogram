@@ -1,12 +1,6 @@
 Changelog:
-- Fix: native crash (SIGABRT) in ConnectionsManager when playing music
-- Fix: music stops/crashes when app goes to background (foreground service fix)
-- Fix: "Check for Update" button unresponsive after first use
-- Fix: auto-install APK after download completes
-- Sleep timer for audio player
-- Sort folders by unread
-- Fade filtered messages (transparent message filters)
-- Add comma after mention
-- Disable unarchive swipe
-- Hide side share button
-- Hide photo counter
+- Fix native tgnet callback crash while streaming or downloading music
+- Fix native timer use-after-free crash in the network event loop
+- Fix music stops or crashes when app goes to background
+- Fix "Check for Update" button unresponsive after first use
+- Fix auto-install APK after download completes

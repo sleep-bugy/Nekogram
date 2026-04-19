@@ -54,9 +54,14 @@ void Timer::setTimeout(uint32_t ms, bool repeat) {
 }
 
 void Timer::onEvent() {
-    callback();
-    if (LOGS_ENABLED) DEBUG_D("timer(%p) call", this);
-    if (started && repeatable && timeout != 0) {
-        ConnectionsManager::getInstance(instanceNum).scheduleEvent(eventObject, timeout);
+    if (!started) {
+        return;
     }
+    if (repeatable && timeout != 0) {
+        ConnectionsManager::getInstance(instanceNum).scheduleEvent(eventObject, timeout);
+    } else {
+        started = false;
+    }
+    if (LOGS_ENABLED) DEBUG_D("timer(%p) call", this);
+    callback();
 }
