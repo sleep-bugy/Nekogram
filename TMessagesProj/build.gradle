@@ -37,7 +37,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-wearable:19.0.0'
     implementation 'com.google.android.gms:play-services-location:21.3.0'
     implementation 'com.googlecode.mp4parser:isoparser:1.1.22'
-    implementation('com.stripe:stripe-android:2.0.2') {
+    implementation('com.stripe:stripe-android:23.7.0') {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
     implementation 'com.google.mlkit:language-id:17.0.6'
