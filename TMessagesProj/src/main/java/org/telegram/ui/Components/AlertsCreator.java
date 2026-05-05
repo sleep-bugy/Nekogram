@@ -7715,58 +7715,72 @@ public class AlertsCreator {
         }
 
         AlertDialog.OnButtonClickListener deleteAction = (dialogInterface, i) -> {
-            ArrayList<Integer> ids = null;
-            long thisDialogId = dialogId;
-            if (isSavedMessages) {
-                thisDialogId = UserConfig.getInstance(currentAccount).getClientUserId();
-            }
-            if (selectedMessage != null) {
-                ids = new ArrayList<>();
-                ArrayList<Long> random_ids = null;
-                if (selectedGroup != null) {
-                    for (int a = 0; a < selectedGroup.messages.size(); a++) {
-                        MessageObject messageObject = selectedGroup.messages.get(a);
-                        ids.add(messageObject.getId());
-                        if (encryptedChat != null && messageObject.messageOwner.random_id != 0 && messageObject.type != 10) {
-                            if (random_ids == null) {
-                                random_ids = new ArrayList<>();
-                            }
-                            random_ids.add(messageObject.messageOwner.random_id);
-                        }
-                    }
-                } else {
-                    ids.add(selectedMessage.getId());
-                    if (encryptedChat != null && selectedMessage.messageOwner.random_id != 0 && selectedMessage.type != 10) {
-                        random_ids = new ArrayList<>();
-                        random_ids.add(selectedMessage.messageOwner.random_id);
-                    }
+            Runnable deleteRunnable = () -> {
+                ArrayList<Integer> ids = null;
+                long thisDialogId = dialogId;
+                if (isSavedMessages) {
+                    thisDialogId = UserConfig.getInstance(currentAccount).getClientUserId();
                 }
-                if (mergeDialogId != 0 && selectedMessage.messageOwner.peer_id != null && selectedMessage.messageOwner.peer_id.chat_id == -mergeDialogId) {
-                    thisDialogId = mergeDialogId;
-                }
-                MessagesController.getInstance(currentAccount).deleteMessages(ids, random_ids, encryptedChat, thisDialogId, topicId, deleteForAll[0], mode);
-            } else {
-                for (int a = 1; a >= 0; a--) {
+                if (selectedMessage != null) {
                     ids = new ArrayList<>();
-                    for (int b = 0; b < selectedMessages[a].size(); b++) {
-                        ids.add(selectedMessages[a].keyAt(b));
-                    }
                     ArrayList<Long> random_ids = null;
-                    if (encryptedChat != null) {
-                        random_ids = new ArrayList<>();
-                        for (int b = 0; b < selectedMessages[a].size(); b++) {
-                            MessageObject msg = selectedMessages[a].valueAt(b);
-                            if (msg.messageOwner.random_id != 0 && msg.type != 10) {
-                                random_ids.add(msg.messageOwner.random_id);
+                    if (selectedGroup != null) {
+                        for (int a = 0; a < selectedGroup.messages.size(); a++) {
+                            MessageObject messageObject = selectedGroup.messages.get(a);
+                            ids.add(messageObject.getId());
+                            if (encryptedChat != null && messageObject.messageOwner.random_id != 0 && messageObject.type != 10) {
+                                if (random_ids == null) {
+                                    random_ids = new ArrayList<>();
+                                }
+                                random_ids.add(messageObject.messageOwner.random_id);
                             }
                         }
+                    } else {
+                        ids.add(selectedMessage.getId());
+                        if (encryptedChat != null && selectedMessage.messageOwner.random_id != 0 && selectedMessage.type != 10) {
+                            random_ids = new ArrayList<>();
+                            random_ids.add(selectedMessage.messageOwner.random_id);
+                        }
                     }
-                    MessagesController.getInstance(currentAccount).deleteMessages(ids, random_ids, encryptedChat, (a == 1 && mergeDialogId != 0) ? mergeDialogId : thisDialogId, topicId, deleteForAll[0], mode);
-                    selectedMessages[a].clear();
+                    if (mergeDialogId != 0 && selectedMessage.messageOwner.peer_id != null && selectedMessage.messageOwner.peer_id.chat_id == -mergeDialogId) {
+                        thisDialogId = mergeDialogId;
+                    }
+                    MessagesController.getInstance(currentAccount).deleteMessages(ids, random_ids, encryptedChat, thisDialogId, topicId, deleteForAll[0], mode);
+                } else {
+                    for (int a = 1; a >= 0; a--) {
+                        ids = new ArrayList<>();
+                        for (int b = 0; b < selectedMessages[a].size(); b++) {
+                            ids.add(selectedMessages[a].keyAt(b));
+                        }
+                        ArrayList<Long> random_ids = null;
+                        if (encryptedChat != null) {
+                            random_ids = new ArrayList<>();
+                            for (int b = 0; b < selectedMessages[a].size(); b++) {
+                                MessageObject msg = selectedMessages[a].valueAt(b);
+                                if (msg.messageOwner.random_id != 0 && msg.type != 10) {
+                                    random_ids.add(msg.messageOwner.random_id);
+                                }
+                            }
+                        }
+                        MessagesController.getInstance(currentAccount).deleteMessages(ids, random_ids, encryptedChat, (a == 1 && mergeDialogId != 0) ? mergeDialogId : thisDialogId, topicId, deleteForAll[0], mode);
+                    }
                 }
-            }
-            if (onDelete != null) {
-                onDelete.run();
+            };
+            Runnable finishDeleteUi = () -> {
+                if (selectedMessages != null) {
+                    for (int a = 0; a < selectedMessages.length; a++) {
+                        selectedMessages[a].clear();
+                    }
+                }
+                if (onDelete != null) {
+                    onDelete.run();
+                }
+            };
+            if (showDeleteMessagesBulletin(fragment, count, deleteRunnable, resourcesProvider)) {
+                finishDeleteUi.run();
+            } else {
+                deleteRunnable.run();
+                finishDeleteUi.run();
             }
         };
 
@@ -7882,6 +7896,18 @@ public class AlertsCreator {
             ((ViewGroup.MarginLayoutParams) dialog.getButtonsLayout().getLayoutParams()).topMargin = dp(-8);
             neutralButton.setTextColor(Theme.getColor(Theme.key_text_RedBold));
         }
+    }
+
+    private static boolean showDeleteMessagesBulletin(BaseFragment fragment, int count, Runnable delayedAction, Theme.ResourcesProvider resourcesProvider) {
+        if (fragment == null || delayedAction == null || count <= 0 || fragment.getParentActivity() == null || !BulletinFactory.canShowBulletin(fragment)) {
+            return false;
+        }
+        Bulletin.SimpleLayout layout = new Bulletin.SimpleLayout(fragment.getParentActivity(), resourcesProvider);
+        layout.setTimer();
+        layout.textView.setText(formatPluralString("MessagesDeletedHint", count));
+        layout.setButton(new Bulletin.UndoButton(fragment.getParentActivity(), true, resourcesProvider).setDelayedAction(delayedAction));
+        Bulletin.make(fragment, layout, Bulletin.DURATION_PROLONG).show();
+        return true;
     }
 
     public static void createThemeCreateDialog(BaseFragment fragment, int type, Theme.ThemeInfo switchToTheme, Theme.ThemeAccent switchToAccent) {
