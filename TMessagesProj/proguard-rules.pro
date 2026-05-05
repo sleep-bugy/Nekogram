@@ -155,3 +155,19 @@
 
 -dontwarn android.support.annotation.*
 -dontwarn androidx.compose.**
+
+# Stripe Terminal SDK - optional dependency, not bundled in release
+-dontwarn com.stripe.stripeterminal.**
+-dontwarn com.stripe.android.stripecardscan.**
+
+# Google Places SDK - optional dependency
+-dontwarn com.google.android.libraries.places.**
+
+# Guava ListenableFuture - provided by other deps at runtime
+-dontwarn com.google.common.util.concurrent.ListenableFuture
+
+# sun.misc.Unsafe - JVM internal, not listed as dependency
+-dontwarn sun.misc.Unsafe
+
+# androidx.window.extensions - optional window manager extensions
+-dontwarn androidx.window.extensions.**
