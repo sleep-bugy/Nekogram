@@ -212,7 +212,9 @@ public class BoostRepository {
                 .setProductType(BillingClient.ProductType.INAPP)
                 .setProductId(option.store_product)
                 .build();
-        BillingController.getInstance().queryProductDetails(Arrays.asList(product), (billingResult, list) -> {
+        BillingController.getInstance().queryProductDetails(Arrays.asList(product), (billingResult, qr) -> {
+            java.util.List<ProductDetails> list = qr.getProductDetailsList();
+            if (list == null || list.isEmpty()) return;
             ProductDetails.OneTimePurchaseOfferDetails offerDetails = list.get(0).getOneTimePurchaseOfferDetails();
             payload.currency = offerDetails.getPriceCurrencyCode();
             payload.amount = (long) ((offerDetails.getPriceAmountMicros() / Math.pow(10, 6)) * Math.pow(10, BillingController.getInstance().getCurrencyExp(option.currency)));
@@ -452,7 +454,9 @@ public class BoostRepository {
                 .setProductType(BillingClient.ProductType.INAPP)
                 .setProductId(option.store_product)
                 .build();
-        BillingController.getInstance().queryProductDetails(Arrays.asList(product), (billingResult, list) -> {
+        BillingController.getInstance().queryProductDetails(Arrays.asList(product), (billingResult, qr) -> {
+            java.util.List<ProductDetails> list = qr.getProductDetailsList();
+            if (list == null || list.isEmpty()) return;
             ProductDetails.OneTimePurchaseOfferDetails offerDetails = list.get(0).getOneTimePurchaseOfferDetails();
             payload.currency = offerDetails.getPriceCurrencyCode();
             payload.amount = (long) ((offerDetails.getPriceAmountMicros() / Math.pow(10, 6)) * Math.pow(10, BillingController.getInstance().getCurrencyExp(option.currency)));
@@ -624,7 +628,9 @@ public class BoostRepository {
                     });
                     return;
                 }
-                BillingController.getInstance().queryProductDetails(products, (billingResult, list) -> {
+                BillingController.getInstance().queryProductDetails(products, (billingResult, qr) -> {
+                    java.util.List<ProductDetails> list = qr.getProductDetailsList();
+                    if (list == null) return;
                     for (ProductDetails productDetails : list) {
                         ProductDetails.OneTimePurchaseOfferDetails offerDetails = productDetails.getOneTimePurchaseOfferDetails();
                         for (TLRPC.TL_premiumGiftCodeOption option : result) {

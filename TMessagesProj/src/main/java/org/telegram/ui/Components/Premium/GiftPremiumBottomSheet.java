@@ -189,9 +189,10 @@ public class GiftPremiumBottomSheet extends BottomSheetWithRecyclerListView impl
                 }
             } else if (!products.isEmpty()) {
                 long startMs = System.currentTimeMillis();
-                BillingController.getInstance().queryProductDetails(products, (billingResult, list) -> {
+                BillingController.getInstance().queryProductDetails(products, (billingResult, qr) -> {
                     long pricePerMonthMaxStore = 0;
-
+                    java.util.List<ProductDetails> list = qr.getProductDetailsList();
+                    if (list == null) return;
                     for (ProductDetails details : list) {
                         for (GiftTier giftTier : giftTiers) {
                             if (giftTier.giftOption.store_product != null && giftTier.giftOption.store_product.equals(details.getProductId())) {

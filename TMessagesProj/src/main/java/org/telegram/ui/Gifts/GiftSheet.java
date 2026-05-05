@@ -853,9 +853,10 @@ public class GiftSheet extends BottomSheetWithRecyclerListView implements Notifi
                 }
             } else if (!products.isEmpty()) {
                 long startMs = System.currentTimeMillis();
-                BillingController.getInstance().queryProductDetails(products, (billingResult, list) -> {
+                BillingController.getInstance().queryProductDetails(products, (billingResult, qr) -> {
                     long pricePerMonthMaxStore = 0;
-
+                    java.util.List<ProductDetails> list = qr.getProductDetailsList();
+                    if (list == null) return;
                     for (ProductDetails details : list) {
                         for (GiftPremiumBottomSheet.GiftTier giftTier : premiumTiers) {
                             if (giftTier.getStoreProduct() != null && giftTier.getStoreProduct().equals(details.getProductId())) {
