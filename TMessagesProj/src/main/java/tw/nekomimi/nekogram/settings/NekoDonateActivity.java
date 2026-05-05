@@ -127,9 +127,10 @@ public class NekoDonateActivity extends BaseNekoSettingsActivity implements Purc
                             .build();
                     billingClient.queryProductDetailsAsync(params, (queryResult, list) -> {
                         if (queryResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-                            if (!list.isEmpty()) {
+                            java.util.List<ProductDetails> details = list.getProductDetailsList();
+                            if (!details.isEmpty()) {
                                 AndroidUtilities.runOnUIThread(() -> {
-                                    productDetails = list;
+                                    productDetails = details;
                                     if (listView != null) {
                                         listView.adapter.update(true);
                                     }

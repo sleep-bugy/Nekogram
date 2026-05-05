@@ -10344,15 +10344,16 @@ public class LoginActivity extends BaseFragment implements NotificationCenter.No
                             .build()
                     );
                     FileLog.d("LoginBilling querying \"" + product + "\" product");
-                    BillingController.getInstance().queryProductDetails(productQueries, (result, list) -> AndroidUtilities.runOnUIThread(() -> {
+                    BillingController.getInstance().queryProductDetails(productQueries, (result, queryResult) -> AndroidUtilities.runOnUIThread(() -> {
                         FileLog.d("LoginBilling queried \"" + product + "\" product: " + BillingController.getResponseCodeString(result.getResponseCode()));
                         if (result.getResponseCode() != BillingClient.BillingResponseCode.OK) {
                             lastError = "BILLING_" + BillingController.getResponseCodeString(result.getResponseCode());
                             BulletinFactory.of(slideViewsContainer, null).createSimpleBulletin(R.raw.error, formatString(R.string.UnknownErrorCode, BillingController.getResponseCodeString(result.getResponseCode())));
                             return;
                         }
+                        java.util.List<com.android.billingclient.api.ProductDetails> list = queryResult.getProductDetailsList();
                         if (list != null && !list.isEmpty()) {
-                            final ProductDetails productDetails = list.get(0);
+                            final com.android.billingclient.api.ProductDetails productDetails = list.get(0);
 
                             final ProductDetails.OneTimePurchaseOfferDetails offer = productDetails.getOneTimePurchaseOfferDetails();
 

@@ -26,6 +26,7 @@ import com.android.billingclient.api.Purchase;
 import com.android.billingclient.api.PurchasesResponseListener;
 import com.android.billingclient.api.PurchasesUpdatedListener;
 import com.android.billingclient.api.QueryProductDetailsParams;
+import com.android.billingclient.api.QueryProductDetailsResult;
 import com.android.billingclient.api.QueryPurchasesParams;
 
 import org.checkerframework.checker.units.qual.A;
@@ -515,7 +516,8 @@ public class BillingController implements PurchasesUpdatedListener, BillingClien
         }
     }
 
-    private void onQueriedPremiumProductDetails(BillingResult billingResult, List<ProductDetails> list) {
+    private void onQueriedPremiumProductDetails(BillingResult billingResult, QueryProductDetailsResult result) {
+        List<ProductDetails> list = result.getProductDetailsList();
         FileLog.d("Billing: Query product details finished " + billingResult + ", " + list);
         if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
             for (ProductDetails details : list) {
