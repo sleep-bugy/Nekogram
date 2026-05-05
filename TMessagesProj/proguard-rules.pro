@@ -171,3 +171,7 @@
 
 # androidx.window.extensions - optional window manager extensions
 -dontwarn androidx.window.extensions.**
+
+# WorkManager & Concurrent Futures - optional for Stripe Analytics
+-dontwarn androidx.work.**
+-dontwarn androidx.concurrent.**
