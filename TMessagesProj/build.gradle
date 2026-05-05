@@ -96,6 +96,11 @@ android {
     if (project.rootProject.file('local.properties').exists()) {
         localProperties.load(project.rootProject.file('local.properties').newDataInputStream())
     }
+    def apiIdValue = localProperties.getProperty("apiId", "0")
+    def apiHashValue = localProperties.getProperty("apiHash", "")
+    def twpicBotUsernameValue = localProperties.getProperty("twpicBotUsername", "")
+    def sentryDsnValue = localProperties.getProperty("sentryDsn", "")
+    def updateManifestUrlValue = localProperties.getProperty("updateManifestUrl", "https://raw.githubusercontent.com/sleep-bugy/Nekogram/main/update.json")
 
     buildTypes {
         debug {
@@ -105,13 +110,11 @@ android {
             buildConfigField("String","BUILD_VERSION_STRING","\"${TG_APP_VERSION_NAME}\"")
             buildConfigField("boolean", "DEBUG_PRIVATE_VERSION", "false")
 
-            buildConfigField("int","API_ID", "${localProperties.get("apiId")}")
-            buildConfigField("String","API_HASH", "\"${localProperties.get("apiHash")}\"")
-            buildConfigField("String","TWPIC_BOT_USERNAME", "\"${localProperties.get("twpicBotUsername")}\"")
-            buildConfigField("String","SENTRY_DSN", "\"${localProperties.get("sentryDsn")}\"")
-            buildConfigField("long","HELPER_BOT_ID", "${localProperties.get("helperBotId")}")
-            buildConfigField("String","HELPER_BOT_USERNAME", "\"${localProperties.get("helperBotUsername")}\"")
-            buildConfigField("String", "CUSTOM_UPDATE_MANIFEST_URL", "\"${localProperties.getProperty("updateManifestUrl", "https://raw.githubusercontent.com/sleep-bugy/Nekogram/main/update.json")}\"")
+            buildConfigField("int","API_ID", apiIdValue)
+            buildConfigField("String","API_HASH", "\"${apiHashValue}\"")
+            buildConfigField("String","TWPIC_BOT_USERNAME", "\"${twpicBotUsernameValue}\"")
+            buildConfigField("String","SENTRY_DSN", "\"${sentryDsnValue}\"")
+            buildConfigField("String", "CUSTOM_UPDATE_MANIFEST_URL", "\"${updateManifestUrlValue}\"")
         }
 
         release {
@@ -121,13 +124,11 @@ android {
             buildConfigField("String","BUILD_VERSION_STRING","\"${TG_APP_VERSION_NAME}\"")
             buildConfigField("boolean", "DEBUG_PRIVATE_VERSION", "false")
 
-            buildConfigField("int","API_ID", "${localProperties.get("apiId")}")
-            buildConfigField("String","API_HASH", "\"${localProperties.get("apiHash")}\"")
-            buildConfigField("String","TWPIC_BOT_USERNAME", "\"${localProperties.get("twpicBotUsername")}\"")
-            buildConfigField("String","SENTRY_DSN", "\"${localProperties.get("sentryDsn")}\"")
-            buildConfigField("long","HELPER_BOT_ID", "${localProperties.get("helperBotId")}")
-            buildConfigField("String","HELPER_BOT_USERNAME", "\"${localProperties.get("helperBotUsername")}\"")
-            buildConfigField("String", "CUSTOM_UPDATE_MANIFEST_URL", "\"${localProperties.getProperty("updateManifestUrl", "https://raw.githubusercontent.com/sleep-bugy/Nekogram/main/update.json")}\"")
+            buildConfigField("int","API_ID", apiIdValue)
+            buildConfigField("String","API_HASH", "\"${apiHashValue}\"")
+            buildConfigField("String","TWPIC_BOT_USERNAME", "\"${twpicBotUsernameValue}\"")
+            buildConfigField("String","SENTRY_DSN", "\"${sentryDsnValue}\"")
+            buildConfigField("String", "CUSTOM_UPDATE_MANIFEST_URL", "\"${updateManifestUrlValue}\"")
         }
     }
     namespace 'org.telegram.messenger'

@@ -11,7 +11,56 @@ on:
     branches: [ "main", "dev" ]
     paths-ignore:
       - '**.md'
+  workflow_dispatch:
+    inputs:
+      build_mode:
+        description: Build mode
+        required: false
+        default: auto
+        type: choice
+        options:
+          - auto
+          - debug
+          - release
+          - all
+      checkout_ref:
+        description: Optional branch, tag, or commit to build
+        required: false
+        type: string
+      version_name:
+        description: Override APP_VERSION_NAME and TG_APP_VERSION_NAME
+        required: false
+        type: string
+      version_code:
+        description: Override APP_VERSION_CODE and TG_APP_VERSION_CODE
+        required: false
+        type: string
+      update_manifest_url:
+        description: Override OTA update manifest URL
+        required: false
+        type: string
   workflow_call:
+    inputs:
+      build_mode:
+        required: false
+        type: string
+        default: auto
+      checkout_ref:
+        required: false
+        type: string
+        default: ""
+      version_name:
+        required: false
+        type: string
+        default: ""
+      version_code:
+        required: false
+        type: string
+        default: ""
+      update_manifest_url:
+        required: false
+        type: string
+        default: ""
 
 jobs:
   build:
@@ -27,6 +76,61 @@ jobs:
       CCACHE_MAXSIZE: "10G"
     steps:
       - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          ref: ${{ inputs.checkout_ref != '' && inputs.checkout_ref || github.ref }}
+
+      - name: Resolve build config
+        id: resolve
+        shell: bash
+        env:
+          INPUT_BUILD_MODE: ${{ inputs.build_mode }}
+          INPUT_VERSION_NAME: ${{ inputs.version_name }}
+          INPUT_VERSION_CODE: ${{ inputs.version_code }}
+          INPUT_UPDATE_MANIFEST_URL: ${{ inputs.update_manifest_url }}
+        run: |
+          set -euo pipefail
+
+          read_prop() {
+            grep -E "^$1=" gradle.properties | tail -n 1 | cut -d= -f2-
+          }
+
+          build_mode="${INPUT_BUILD_MODE:-}"
+          if [ -z "$build_mode" ] || [ "$build_mode" = "auto" ]; then
+            if [ "${GITHUB_EVENT_NAME}" = "pull_request" ]; then
+              build_mode="debug"
+            else
+              build_mode="release"
+            fi
+          fi
+
+          version_name="${INPUT_VERSION_NAME:-}"
+          version_code="${INPUT_VERSION_CODE:-}"
+          if [ -z "$version_name" ] || [ -z "$version_code" ]; then
+            if [ "${GITHUB_REF_TYPE:-}" = "tag" ] && [[ "${GITHUB_REF_NAME}" =~ ^v(.+)-([0-9]+)$ ]]; then
+              parsed_version_name="${BASH_REMATCH[1]}"
+              parsed_version_code="${BASH_REMATCH[2]}"
+              version_name="${version_name:-$parsed_version_name}"
+              version_code="${version_code:-$parsed_version_code}"
+            fi
+          fi
+          version_name="${version_name:-$(read_prop APP_VERSION_NAME)}"
+          version_code="${version_code:-$(read_prop APP_VERSION_CODE)}"
+
+          if ! [[ "$version_code" =~ ^[0-9]+$ ]]; then
+            echo "Invalid version_code: $version_code" >&2
+            exit 1
+          fi
+
+          update_manifest_url="${INPUT_UPDATE_MANIFEST_URL:-}"
+          if [ -z "$update_manifest_url" ] && [ "$build_mode" != "debug" ]; then
+            update_manifest_url="https://github.com/${GITHUB_REPOSITORY}/releases/latest/download/update.json"
+          fi
+
+          echo "build_mode=$build_mode" >> "$GITHUB_OUTPUT"
+          echo "version_name=$version_name" >> "$GITHUB_OUTPUT"
+          echo "version_code=$version_code" >> "$GITHUB_OUTPUT"
+          echo "update_manifest_url=$update_manifest_url" >> "$GITHUB_OUTPUT"
 
       - name: Set up JDK 21
         uses: actions/setup-java@v5
@@ -48,54 +152,111 @@ jobs:
           packages: "build-tools;36.1.0 ndk;27.3.13750724 platforms;android-36"
 
       - name: Configure Gradle
+        env:
+          VERSION_NAME: ${{ steps.resolve.outputs.version_name }}
+          VERSION_CODE: ${{ steps.resolve.outputs.version_code }}
         run: |
+          set -euo pipefail
           mkdir -p ~/.gradle
           echo 'org.gradle.caching=true' >> ~/.gradle/gradle.properties
           echo 'org.gradle.parallel=true' >> ~/.gradle/gradle.properties
           echo 'org.gradle.jvmargs=-Xmx8192m -Dfile.encoding=UTF-8 -XX:+UseParallelGC' >> ~/.gradle/gradle.properties
           echo 'android.native.buildOutput=verbose' >> ~/.gradle/gradle.properties
+          echo "APP_VERSION_NAME=$VERSION_NAME" >> ~/.gradle/gradle.properties
+          echo "APP_VERSION_CODE=$VERSION_CODE" >> ~/.gradle/gradle.properties
+          echo "TG_APP_VERSION_NAME=$VERSION_NAME" >> ~/.gradle/gradle.properties
+          echo "TG_APP_VERSION_CODE=$VERSION_CODE" >> ~/.gradle/gradle.properties
 
-      - name: Configure Signing
-        if: github.event_name != 'pull_request'
+      - name: Configure local build files
+        shell: bash
+        env:
+          BUILD_MODE: ${{ steps.resolve.outputs.build_mode }}
+          UPDATE_MANIFEST_URL: ${{ steps.resolve.outputs.update_manifest_url }}
+          API_ID: ${{ secrets.API_ID }}
+          API_HASH: ${{ secrets.API_HASH }}
+          SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+          SENTRY_PROPERTIES_B64: ${{ secrets.SENTRY_PROPERTIES }}
+          TWPIC_BOT_USERNAME: ${{ secrets.TWPIC_BOT_USERNAME }}
+          KEYSTORE_JKS_B64: ${{ secrets.KEYSTORE_JKS }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          GOOGLE_SERVICES_DEBUG_JSON_B64: ${{ secrets.GOOGLE_SERVICES_DEBUG_JSON != '' && secrets.GOOGLE_SERVICES_DEBUG_JSON || secrets.GOOGLE_SERVICES_JSON }}
+          GOOGLE_SERVICES_RELEASE_JSON_B64: ${{ secrets.GOOGLE_SERVICES_RELEASE_JSON != '' && secrets.GOOGLE_SERVICES_RELEASE_JSON || secrets.GOOGLE_SERVICES_JSON }}
         run: |
-          echo "storeFile=${{ github.workspace }}/keystore.jks" >> local.properties
-          echo "storePassword=${{ secrets.KEYSTORE_PASSWORD }}" >> local.properties
-          echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> local.properties
-          echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> local.properties
-          
-          echo "${{ secrets.KEYSTORE_JKS }}" | base64 --decode > keystore.jks
+          set -euo pipefail
 
-      - name: Configure Secrets
-        if: github.event_name != 'pull_request'
-        run: |
-          echo "apiId=${{ secrets.API_ID }}" >> local.properties
-          echo "apiHash=${{ secrets.API_HASH }}" >> local.properties
-          echo "helperBotId=${{ secrets.HELPER_BOT_ID }}" >> local.properties
-          echo "helperBotUsername=${{ secrets.HELPER_BOT_USERNAME }}" >> local.properties
-          echo "sentryDsn=${{ secrets.SENTRY_DSN }}" >> local.properties
+          write_google_services() {
+            local target="$1"
+            local package_name="$2"
+            local encoded="$3"
 
-          echo "${{ secrets.SENTRY_PROPERTIES }}" | base64 --decode > sentry.properties
+            if [ -n "$encoded" ]; then
+              printf '%s' "$encoded" | base64 --decode > "$target"
+              return
+            fi
 
-      - name: Configure Build
-        run: |
-          echo "twpicBotUsername=${{ secrets.TWPIC_BOT_USERNAME }}" >> local.properties
+            python3 -c 'import json, sys; target, package_name = sys.argv[1:3]; payload = {"project_info": {"project_number": "000000000000", "project_id": "placeholder-project", "storage_bucket": "placeholder-project.appspot.com"}, "client": [{"client_info": {"mobilesdk_app_id": "1:000000000000:android:0000000000000000", "android_client_info": {"package_name": package_name}}, "oauth_client": [], "api_key": [{"current_key": "placeholder"}], "services": {"appinvite_service": {"other_platform_oauth_client": []}}}], "configuration_version": "1"}; open(target, "w", encoding="utf-8").write(json.dumps(payload, ensure_ascii=False, indent=2) + "\n")' "$target" "$package_name"
+          }
 
-          echo "${{ secrets.GOOGLE_SERVICES_JSON }}" | base64 --decode > TMessagesProj_App/google-services.json
+          : > local.properties
+          echo "apiId=${API_ID:-0}" >> local.properties
+          echo "apiHash=${API_HASH:-}" >> local.properties
+          echo "sentryDsn=${SENTRY_DSN:-}" >> local.properties
+          echo "twpicBotUsername=${TWPIC_BOT_USERNAME:-}" >> local.properties
+          if [ -n "${UPDATE_MANIFEST_URL:-}" ]; then
+            echo "updateManifestUrl=${UPDATE_MANIFEST_URL}" >> local.properties
+          fi
+
+          if [ "$BUILD_MODE" = "release" ] || [ "$BUILD_MODE" = "all" ]; then
+            if [ -z "${KEYSTORE_JKS_B64:-}" ] || [ -z "${KEYSTORE_PASSWORD:-}" ] || [ -z "${KEY_ALIAS:-}" ] || [ -z "${KEY_PASSWORD:-}" ]; then
+              echo "Missing release signing secrets" >&2
+              exit 1
+            fi
+            if [ -z "${API_ID:-}" ] || [ -z "${API_HASH:-}" ]; then
+              echo "Missing API_ID or API_HASH for release build" >&2
+              exit 1
+            fi
+            if [ -z "${GOOGLE_SERVICES_RELEASE_JSON_B64:-}" ]; then
+              echo "Missing release google-services.json secret" >&2
+              exit 1
+            fi
+            echo "storeFile=${GITHUB_WORKSPACE}/keystore.jks" >> local.properties
+            echo "storePassword=${KEYSTORE_PASSWORD}" >> local.properties
+            echo "keyAlias=${KEY_ALIAS}" >> local.properties
+            echo "keyPassword=${KEY_PASSWORD}" >> local.properties
+            printf '%s' "$KEYSTORE_JKS_B64" | base64 --decode > keystore.jks
+            chmod 600 keystore.jks
+          fi
+
+          if [ -n "${SENTRY_PROPERTIES_B64:-}" ]; then
+            printf '%s' "$SENTRY_PROPERTIES_B64" | base64 --decode > sentry.properties
+          fi
+
+          mkdir -p TMessagesProj_App/src/debug TMessagesProj_App/src/release
+          write_google_services "TMessagesProj_App/src/debug/google-services.json" "tw.nekomimi.nekogram.beta" "${GOOGLE_SERVICES_DEBUG_JSON_B64:-}"
+          write_google_services "TMessagesProj_App/src/release/google-services.json" "tw.nekomimi.nekogram" "${GOOGLE_SERVICES_RELEASE_JSON_B64:-}"
 
       - name: Build with Gradle (Debug)
-        if: github.event_name == 'pull_request'
+        if: steps.resolve.outputs.build_mode == 'debug' || steps.resolve.outputs.build_mode == 'all'
         run: |
-          ./gradlew :TMessagesProj_App:assembleDebug
+          ./gradlew :TMessagesProj_App:assembleDebug --no-daemon
 
-      - name: Build with Gradle
-        if: github.event_name != 'pull_request'
+      - name: Build with Gradle (Release)
+        if: steps.resolve.outputs.build_mode == 'release' || steps.resolve.outputs.build_mode == 'all'
+        shell: bash
         run: |
-          ./gradlew assembleRelease
-          ./gradlew bundlePlay
-          ./gradlew sentryUploadSourceBundlePlay
+          set -euo pipefail
+          ./gradlew :TMessagesProj_App:assembleRelease --no-daemon
+          ./gradlew :TMessagesProj_App:bundlePlay --no-daemon
+          if [ -f sentry.properties ]; then
+            ./gradlew :TMessagesProj_App:sentryUploadSourceBundlePlay --no-daemon
+          else
+            echo "Skipping Sentry source bundle upload because sentry.properties is missing"
+          fi
 
       - name: Attest
-        if: github.event_name != 'pull_request'
+        if: github.event_name != 'pull_request' && steps.resolve.outputs.build_mode != 'debug'
         uses: actions/attest@v4
         with:
           subject-path: '${{ github.workspace }}/TMessagesProj_App/build/outputs'

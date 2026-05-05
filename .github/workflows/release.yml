@@ -4,10 +4,118 @@ on:
     tags:
       - "v*"
   workflow_dispatch:
+    inputs:
+      tag_name:
+        description: Existing release tag to publish
+        required: true
+        type: string
+      version_name:
+        description: Optional override for APP_VERSION_NAME
+        required: false
+        type: string
+      version_code:
+        description: Optional override for APP_VERSION_CODE
+        required: false
+        type: string
+      changelog:
+        description: Optional release notes and OTA changelog
+        required: false
+        type: string
+      can_not_skip:
+        description: Mark OTA update as non-skippable
+        required: false
+        default: false
+        type: boolean
+      prerelease:
+        description: Mark the GitHub release as a prerelease
+        required: false
+        default: false
+        type: boolean
 
 jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      tag_name: ${{ steps.meta.outputs.tag_name }}
+      version_name: ${{ steps.meta.outputs.version_name }}
+      version_code: ${{ steps.meta.outputs.version_code }}
+      changelog: ${{ steps.meta.outputs.changelog }}
+      release_name: ${{ steps.meta.outputs.release_name }}
+      manifest_url: ${{ steps.meta.outputs.manifest_url }}
+      can_not_skip: ${{ steps.meta.outputs.can_not_skip }}
+      prerelease: ${{ steps.meta.outputs.prerelease }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Resolve release metadata
+        id: meta
+        shell: bash
+        env:
+          INPUT_TAG_NAME: ${{ inputs.tag_name }}
+          INPUT_VERSION_NAME: ${{ inputs.version_name }}
+          INPUT_VERSION_CODE: ${{ inputs.version_code }}
+          INPUT_CHANGELOG: ${{ inputs.changelog }}
+          INPUT_CAN_NOT_SKIP: ${{ inputs.can_not_skip }}
+          INPUT_PRERELEASE: ${{ inputs.prerelease }}
+        run: |
+          set -euo pipefail
+
+          tag_name="${INPUT_TAG_NAME:-${GITHUB_REF_NAME:-}}"
+          if [ -z "$tag_name" ]; then
+            echo "Missing tag name" >&2
+            exit 1
+          fi
+          if ! git rev-parse -q --verify "refs/tags/${tag_name}" >/dev/null; then
+            echo "Tag not found: ${tag_name}" >&2
+            exit 1
+          fi
+          if ! [[ "$tag_name" =~ ^v(.+)-([0-9]+)$ ]]; then
+            echo "Tag must match v<version_name>-<version_code>" >&2
+            exit 1
+          fi
+
+          parsed_version_name="${BASH_REMATCH[1]}"
+          parsed_version_code="${BASH_REMATCH[2]}"
+          version_name="${INPUT_VERSION_NAME:-$parsed_version_name}"
+          version_code="${INPUT_VERSION_CODE:-$parsed_version_code}"
+          changelog="${INPUT_CHANGELOG:-}"
+          if [ -z "$changelog" ]; then
+            changelog="$(git tag -l --format='%(contents)' "$tag_name" | sed '/^[[:space:]]*$/d' || true)"
+          fi
+          if [ -z "$changelog" ]; then
+            changelog="Release ${version_name}"
+          fi
+
+          release_name="Nekogram ${version_name} (${version_code})"
+          manifest_url="https://github.com/${GITHUB_REPOSITORY}/releases/latest/download/update.json"
+          can_not_skip="${INPUT_CAN_NOT_SKIP:-false}"
+          prerelease="${INPUT_PRERELEASE:-false}"
+
+          echo "tag_name=$tag_name" >> "$GITHUB_OUTPUT"
+          echo "version_name=$version_name" >> "$GITHUB_OUTPUT"
+          echo "version_code=$version_code" >> "$GITHUB_OUTPUT"
+          echo "release_name=$release_name" >> "$GITHUB_OUTPUT"
+          echo "manifest_url=$manifest_url" >> "$GITHUB_OUTPUT"
+          echo "can_not_skip=$can_not_skip" >> "$GITHUB_OUTPUT"
+          echo "prerelease=$prerelease" >> "$GITHUB_OUTPUT"
+          {
+            echo 'changelog<<EOF'
+            printf '%s\n' "$changelog"
+            echo EOF
+          } >> "$GITHUB_OUTPUT"
+
   build:
+    needs:
+      - prepare
     uses: ./.github/workflows/build.yml
+    with:
+      build_mode: release
+      checkout_ref: ${{ needs.prepare.outputs.tag_name }}
+      version_name: ${{ needs.prepare.outputs.version_name }}
+      version_code: ${{ needs.prepare.outputs.version_code }}
+      update_manifest_url: ${{ needs.prepare.outputs.manifest_url }}
     secrets: inherit
     permissions:
       id-token: write
@@ -15,6 +123,7 @@ jobs:
       artifact-metadata: write
   release:
     needs:
+      - prepare
       - build
     runs-on: ubuntu-latest
     permissions:
@@ -22,13 +131,53 @@ jobs:
     steps:
       - name: Download artifacts
         uses: actions/download-artifact@v8
+        with:
+          name: outputs
+          path: outputs
 
       - name: Display downloaded files
-        run: ls -R
+        run: ls -R outputs
+
+      - name: Generate update manifest
+        id: manifest
+        shell: bash
+        env:
+          TAG_NAME: ${{ needs.prepare.outputs.tag_name }}
+          VERSION_NAME: ${{ needs.prepare.outputs.version_name }}
+          VERSION_CODE: ${{ needs.prepare.outputs.version_code }}
+          CHANGELOG: ${{ needs.prepare.outputs.changelog }}
+          CAN_NOT_SKIP: ${{ needs.prepare.outputs.can_not_skip }}
+        run: |
+          set -euo pipefail
+
+          apk_path="$(find outputs/apk -type f -name '*.apk' | sort | head -n 1)"
+          if [ -z "$apk_path" ]; then
+            echo "No APK found in outputs/apk" >&2
+            exit 1
+          fi
+
+          apk_name="$(basename "$apk_path")"
+          apk_size="$(wc -c < "$apk_path" | tr -d ' ')"
+          apk_sha256="$(sha256sum "$apk_path" | awk '{print $1}')"
+          apk_url="https://github.com/${GITHUB_REPOSITORY}/releases/download/${TAG_NAME}/${apk_name}"
+          echo "apk_name=$apk_name" >> "$GITHUB_OUTPUT"
+          echo "apk_size=$apk_size" >> "$GITHUB_OUTPUT"
+          echo "apk_sha256=$apk_sha256" >> "$GITHUB_OUTPUT"
+          echo "apk_url=$apk_url" >> "$GITHUB_OUTPUT"
+          export APK_NAME="$apk_name"
+          export APK_SIZE="$apk_size"
+          export APK_SHA256="$apk_sha256"
+          export APK_URL="$apk_url"
+          python3 -c 'import json, os; manifest = {"version": os.environ["VERSION_NAME"], "version_code": int(os.environ["VERSION_CODE"]), "url": os.environ["APK_URL"], "file_name": os.environ["APK_NAME"], "size": int(os.environ["APK_SIZE"]), "sha256": os.environ["APK_SHA256"], "can_not_skip": os.environ["CAN_NOT_SKIP"].lower() == "true", "changelog": os.environ["CHANGELOG"]}; open("update.json", "w", encoding="utf-8").write(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")'
 
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ needs.prepare.outputs.tag_name }}
+          name: ${{ needs.prepare.outputs.release_name }}
+          body: ${{ needs.prepare.outputs.changelog }}
+          prerelease: ${{ needs.prepare.outputs.prerelease == 'true' }}
           files: |
-            apk/**/*.apk
-            bundle/**/*.aab
+            outputs/apk/**/*.apk
+            outputs/bundle/**/*.aab
+            update.json

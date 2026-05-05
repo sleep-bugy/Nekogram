@@ -8,9 +8,9 @@ import tw.nekomimi.nekogram.helpers.UserHelper;
 import tw.nekomimi.nekogram.helpers.remote.ConfigHelper;
 
 public class Extra {
-    // https://core.telegram.org/api/obtaining_api_id
-    public static final int APP_ID = hide;
-    public static final String APP_HASH = "hide";
+    // CI and local builds now inject the real API values via BuildConfig.
+    public static final int APP_ID = 0;
+    public static final String APP_HASH = "";
 
     public static final String PLAYSTORE_APP_URL = "";
 
@@ -24,7 +24,7 @@ public class Extra {
 
     public static String TLV_URL = "";
 
-    public static String SENTRY_DSN = "hide";
+    public static String SENTRY_DSN = "";
 
     public static boolean isDirectApp() {
         return "release".equals(BuildConfig.BUILD_TYPE) || "debug".equals(BuildConfig.BUILD_TYPE);
