@@ -233,9 +233,9 @@ jobs:
             printf '%s' "$SENTRY_PROPERTIES_B64" | base64 --decode > sentry.properties
           fi
 
-          mkdir -p TMessagesProj_App/src/debug TMessagesProj_App/src/play
+          mkdir -p TMessagesProj_App/src/debug
           write_google_services "TMessagesProj_App/src/debug/google-services.json" "tw.nekomimi.nekogram.beta" "${GOOGLE_SERVICES_DEBUG_JSON_B64:-}"
-          write_google_services "TMessagesProj_App/src/play/google-services.json" "tw.nekomimi.nekogram" "${GOOGLE_SERVICES_RELEASE_JSON_B64:-}"
+          write_google_services "TMessagesProj_App/google-services.json" "tw.nekomimi.nekogram" "${GOOGLE_SERVICES_RELEASE_JSON_B64:-}"
 
       - name: Build with Gradle (Debug)
         if: steps.resolve.outputs.build_mode == 'debug' || steps.resolve.outputs.build_mode == 'all'
